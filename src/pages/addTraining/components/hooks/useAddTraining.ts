@@ -5,6 +5,7 @@ import FirebaseService from "../../../../services/firebaseService";
 import { routes } from "../../../../static/routes";
 import {
   addExercise,
+  clearForm,
   selectDate,
   selectGym,
   selectTrainingExercises,
@@ -65,9 +66,14 @@ const useAddTraining = () => {
       return;
     }
 
-    FirebaseService.addTraining(trainingForm);
-    setIsSending(false);
-    navigate(routes.home);
+    try {
+      FirebaseService.addTraining(trainingForm);
+      setIsSending(false);
+      dispatch(clearForm());
+      navigate(routes.home);
+    } catch (e) {
+      setErrorMessage("Error");
+    }
   };
 
   const dismissErrorMessage = () => setErrorMessage("");

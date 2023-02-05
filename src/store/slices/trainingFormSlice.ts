@@ -15,6 +15,12 @@ const trainingFormSlice = createSlice({
   name: "trainingForm",
   initialState,
   reducers: {
+    clearForm(state) {
+      state.id = uuidv4();
+      state.date = "";
+      state.gym = "";
+      state.exercises = [];
+    },
     setDate(state, action: PayloadAction<{ date: string }>) {
       const { date } = action.payload;
 
@@ -154,6 +160,7 @@ const trainingFormSlice = createSlice({
 });
 
 export const {
+  clearForm,
   setDate,
   setGym,
   addExercise,
