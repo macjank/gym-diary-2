@@ -6,6 +6,7 @@ import Navigation from "./components/navigation/Navigation";
 import { routes } from "./static/routes";
 import AddTraining from "./pages/addTraining/AddTraining";
 import FirebaseService from "./services/firebaseService";
+import ExercisesBase from "./pages/exercisesBase/ExercisesBase";
 
 function App() {
   useEffect(() => {
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path={routes.home} element={<Home />} />
         <Route path={routes.addTraining} element={<AddTraining />} />
+        <Route path={routes.exercisesBase} element={<ExercisesBase />} />
       </Routes>
     </>
   );

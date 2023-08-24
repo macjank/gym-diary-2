@@ -74,7 +74,6 @@ const AddTraining = () => {
             <Button type="submit" disabled={isSending} variant="contained">
               Save
             </Button>
-            <Button variant="contained">Save</Button>
           </ButtonGroup>
         </form>
       </ContentWrapper>

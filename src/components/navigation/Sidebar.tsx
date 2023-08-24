@@ -9,19 +9,23 @@ interface SidebarProps {
 
 const Sidebar = ({ closeSidebar }: SidebarProps) => {
   return (
-    <Box>
+    <Box position="relative">
       <IconButton
         onClick={closeSidebar}
         size="large"
         edge="start"
         color="inherit"
         aria-label="menu"
+        sx={{ position: "absolute", right: "0", top: "0" }}
       >
         <CloseOutlined />
       </IconButton>
-      <MenuList>
+      <MenuList sx={{ marginTop: "3rem" }}>
         <NavLink to={routes.addTraining} onClick={closeSidebar}>
           <MenuItem sx={{ padding: "1rem 3rem" }}>Add training</MenuItem>
+        </NavLink>
+        <NavLink to={routes.exercisesBase} onClick={closeSidebar}>
+          <MenuItem sx={{ padding: "1rem 3rem" }}>Exercises base</MenuItem>
         </NavLink>
       </MenuList>
     </Box>
