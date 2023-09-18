@@ -8,61 +8,50 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  selectBaseExercises,
-  selectBaseMuscles,
-} from "../../../store/slices/exercisesBaseSlice";
-import {
-  addSet,
-  removeExercise,
-  selectBaseExerciseForExercise,
-  selectMuscleForExercise,
-} from "../../../store/slices/trainingFormSlice";
-import { TrainingExercise } from "../../../types/apiTypes";
+
 import SetForm from "./SetForm";
 import CloseIcon from "@mui/icons-material/Close";
+import { Controller, useFieldArray, useFormContext } from "react-hook-form";
+import { TrainingFormData } from "../TrainingForm";
+import useExercisesCollection from "../../../store/hooks/useExercisesCollection";
 
 interface ExerciseFormProps {
-  exercise: TrainingExercise;
-  number: number;
+  index: number;
+  onRemove: () => void;
 }
 
-const ExerciseForm = ({ exercise, number }: ExerciseFormProps) => {
-  const dispatch = useDispatch();
+const ExerciseForm = ({ index, onRemove }: ExerciseFormProps) => {
+  const { exercises } = useExercisesCollection();
 
-  const baseExercises = useSelector(selectBaseExercises);
-  const baseMuscles = useSelector(selectBaseMuscles);
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext<TrainingFormData>();
+  const {
+    fields: sets,
+    append,
+    remove,
+  } = useFieldArray({
+    control,
+    name: `exercises.${index}.sets`,
+  });
 
-  const getExercisesByMuscleId = (muscleId: string) => {
-    return baseExercises.filter((exercise) => exercise.muscleId === muscleId);
+  const addSet = () => {
+    append({ repetitions: null, weight: null });
   };
 
-  const handleSelectMuscle = (e: any) => {
-    const muscleId = e.target.value;
-
-    dispatch(selectMuscleForExercise({ exerciseId: exercise.id, muscleId }));
-  };
-
-  const handleSelectBaseExercise = (e: any) => {
-    const baseExerciseId = e.target.value;
-
-    dispatch(
-      selectBaseExerciseForExercise({ exerciseId: exercise.id, baseExerciseId })
-    );
-  };
 
   return (
-    <Grid key={exercise.id} mt={"2rem"}>
+    <Grid mt={"2rem"}>
       <Box
         display="flex"
         justifyContent="space-between"
         alignItems="center"
         mb="1rem"
       >
-        <Typography variant="h6">Exercise {number}</Typography>
+        <Typography variant="h6">Exercise</Typography>
         <IconButton
-          onClick={() => dispatch(removeExercise({ exerciseId: exercise.id }))}
+          onClick={onRemove}
           size="large"
           edge="start"
           color="inherit"
@@ -72,40 +61,49 @@ const ExerciseForm = ({ exercise, number }: ExerciseFormProps) => {
         </IconButton>
       </Box>
 
-      <InputLabel htmlFor="muscle">Muscle</InputLabel>
-      <Select
-        id="muscle"
-        value={exercise.muscleId}
-        onChange={handleSelectMuscle}
-        sx={{ width: "100%" }}
-      >
-        {baseMuscles.map((muscle) => (
-          <MenuItem key={muscle.id} value={muscle.id}>
-            {muscle.name}
-          </MenuItem>
-        ))}
-      </Select>
-
       <InputLabel htmlFor="exercise-name">Exercise name</InputLabel>
-      <Select
-        id="exercise-name"
-        value={exercise.baseExerciseId}
-        onChange={handleSelectBaseExercise}
-        sx={{ width: "100%" }}
-      >
-        {getExercisesByMuscleId(exercise.muscleId).map((baseExercise) => (
-          <MenuItem value={baseExercise.id}>{baseExercise.name}</MenuItem>
-        ))}
-      </Select>
+      <Controller
+        name={`exercises.${index}.exerciseName`}
+        control={control}
+        render={({ field: { value, onChange } }) => (
+          <Select
+            id="exercise-name"
+            sx={{ width: "100%" }}
+            value={value}
+            onChange={onChange}
+            error={!!errors?.exercises?.[index]?.exerciseName}
+          >
+            {exercises.map((ex) => (
+              <MenuItem key={ex.id} value={ex.id}>
+                {ex.name["pl"]}
+              </MenuItem>
+            ))}
+          </Select>
+        )}
+      />
 
-      {exercise.sets.map((set, index) => (
-        <SetForm exerciseId={exercise.id} set={set} number={index + 1} />
+      {errors?.exercises?.[index]?.exerciseName && (
+        <Typography variant="caption" color="error">
+          {errors?.exercises?.[index]?.exerciseName?.message}
+        </Typography>
+      )}
+
+      {!!errors.exercises?.[index]?.sets && (
+        <Typography variant="caption" color="error">
+          {errors.exercises?.[index]?.sets?.message}
+        </Typography>
+      )}
+
+      {sets.map((set, setIndex) => (
+        <SetForm
+          key={set.id}
+          exerciseIndex={index}
+          setIndex={setIndex}
+          removeSet={() => remove(setIndex)}
+        />
       ))}
 
-      <Button
-        onClick={() => dispatch(addSet({ exerciseId: exercise.id }))}
-        sx={{ marginTop: "1rem", width: "100%" }}
-      >
+      <Button sx={{ marginTop: "1rem", width: "100%" }} onClick={addSet}>
         Add set
       </Button>
     </Grid>

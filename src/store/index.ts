@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import exercisesBaseSlice from "./slices/exercisesBaseSlice";
-import trainingFormSlice from "./slices/trainingFormSlice";
+import exercisesCollectionSlice from "./slices/exercisesCollectionSlice";
+import exercisesCategoriesCollectionSlice from "./slices/exercisesCategoriesCollectionSlice";
 
 const store = configureStore({
   reducer: {
-    exercisesBase: exercisesBaseSlice,
-    trainingForm: trainingFormSlice,
+    exercisesCollection: exercisesCollectionSlice,
+    exercisesCategoriesCollection: exercisesCategoriesCollectionSlice,
   },
 });
 

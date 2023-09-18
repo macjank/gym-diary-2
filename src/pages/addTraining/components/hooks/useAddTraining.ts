@@ -1,95 +1,98 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import FirebaseService from "../../../../services/firebaseService";
-import { routes } from "../../../../static/routes";
-import {
-  addExercise,
-  clearForm,
-  selectDate,
-  selectGym,
-  selectTrainingExercises,
-  selectTrainingForm,
-  setDate,
-  setGym,
-} from "../../../../store/slices/trainingFormSlice";
-import { Training } from "../../../../types/apiTypes";
+// import React, { useState } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import { useNavigate } from "react-router-dom";
+// import FirebaseService from "../../../../services/firebaseService";
+// import { routes } from "../../../../static/routes";
+// import {
+//   addExercise,
+//   clearForm,
+//   selectDate,
+//   selectGym,
+//   selectTrainingExercises,
+//   selectTrainingForm,
+//   setDate,
+//   setGym,
+// } from "../../../../store/slices/trainingFormSlice";
+// import { Training } from "../../../../types/apiTypes";
 
 const useAddTraining = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  //TODO:
+  // const navigate = useNavigate();
+  // const dispatch = useDispatch();
 
-  const trainingForm = useSelector(selectTrainingForm);
-  const trainingExercises = useSelector(selectTrainingExercises);
-  const date = useSelector(selectDate);
-  const gym = useSelector(selectGym);
+  // const trainingForm = useSelector(selectTrainingForm);
+  // const trainingExercises = useSelector(selectTrainingExercises);
+  // const date = useSelector(selectDate);
+  // const gym = useSelector(selectGym);
 
-  const [isSending, setIsSending] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [isSending, setIsSending] = useState(false);
+  // const [errorMessage, setErrorMessage] = useState("");
 
-  const handleChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.currentTarget.value;
-    dispatch(setDate({ date: val }));
-  };
-  const handleChangeGym = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setGym({ gym: e.currentTarget.value }));
-  };
+  // const handleChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const val = e.currentTarget.value;
+  //   dispatch(setDate({ date: val }));
+  // };
+  // const handleChangeGym = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   dispatch(setGym({ gym: e.currentTarget.value }));
+  // };
 
-  const handleAddExercise = () => dispatch(addExercise());
+  // const handleAddExercise = () => dispatch(addExercise());
 
-  const validateTrainingForm = (trainingForm: Training) => {
-    const isDateValid = !!trainingForm.date;
-    const isGymValid = !!trainingForm.gym;
+  // const validateTrainingForm = (trainingForm: Training) => {
+  //   const isDateValid = !!trainingForm.date;
+  //   const isGymValid = !!trainingForm.gym;
 
-    const areExercisesValid = trainingForm.exercises.every(
-      (exercise) =>
-        !!exercise.muscleId &&
-        !!exercise.baseExerciseId &&
-        exercise.sets.every((set) => !!set.repetitions && !!set.weight)
-    );
+  //   const areExercisesValid = trainingForm.exercises.every(
+  //     (exercise) =>
+  //       !!exercise.muscleId &&
+  //       !!exercise.baseExerciseId &&
+  //       exercise.sets.every((set) => !!set.repetitions && !!set.weight)
+  //   );
 
-    const isFormValid = isDateValid && isGymValid && areExercisesValid;
+  //   const isFormValid = isDateValid && isGymValid && areExercisesValid;
 
-    return isFormValid;
-  };
+  //   return isFormValid;
+  // };
 
-  const handleSubmitTraining = (e: React.SyntheticEvent) => {
-    e.preventDefault();
+  // const handleSubmitTraining = (e: React.SyntheticEvent) => {
+  //   e.preventDefault();
 
-    setIsSending(true);
-    const isValid = validateTrainingForm(trainingForm);
+  //   setIsSending(true);
+  //   const isValid = validateTrainingForm(trainingForm);
 
-    if (!isValid) {
-      setErrorMessage("Invalid data");
+  //   if (!isValid) {
+  //     setErrorMessage("Invalid data");
 
-      setIsSending(false);
-      return;
-    }
+  //     setIsSending(false);
+  //     return;
+  //   }
 
-    try {
-      FirebaseService.addTraining(trainingForm);
-      setIsSending(false);
-      dispatch(clearForm());
-      navigate(routes.home);
-    } catch (e) {
-      setErrorMessage("Error");
-    }
-  };
+  //   try {
+  //     FirebaseService.addTraining(trainingForm);
+  //     setIsSending(false);
+  //     dispatch(clearForm());
+  //     navigate(routes.home);
+  //   } catch (e) {
+  //     setErrorMessage("Error");
+  //   }
+  // };
 
-  const dismissErrorMessage = () => setErrorMessage("");
+  // const dismissErrorMessage = () => setErrorMessage("");
 
-  return {
-    date,
-    handleChangeDate,
-    gym,
-    handleChangeGym,
-    trainingExercises,
-    handleAddExercise,
-    handleSubmitTraining,
-    errorMessage,
-    dismissErrorMessage,
-    isSending,
-  };
+  // return {
+  //   date,
+  //   handleChangeDate,
+  //   gym,
+  //   handleChangeGym,
+  //   trainingExercises,
+  //   handleAddExercise,
+  //   handleSubmitTraining,
+  //   errorMessage,
+  //   dismissErrorMessage,
+  //   isSending,
+  // };
+
+  return {};
 };
 
 export default useAddTraining;

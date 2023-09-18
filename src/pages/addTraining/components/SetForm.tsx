@@ -6,49 +6,33 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useDispatch } from "react-redux";
-import {
-  addRepsForSet,
-  addWeightForSet,
-  removeSet,
-} from "../../../store/slices/trainingFormSlice";
-import { TrainingSet } from "../../../types/apiTypes";
 import CloseIcon from "@mui/icons-material/Close";
+import { Controller, useFormContext } from "react-hook-form";
+import { TrainingFormData } from "../TrainingForm";
 
 interface SetFormProps {
-  exerciseId: string;
-  set: TrainingSet;
-  number: number;
+  exerciseIndex: number;
+  setIndex: number;
+  removeSet: any;
 }
 
-const SetForm = ({ exerciseId, set, number }: SetFormProps) => {
-  const dispatch = useDispatch();
-
-  const handleChangeWeight = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const input = e.currentTarget.value;
-    const weight = !input ? null : +input;
-
-    dispatch(addWeightForSet({ exerciseId, setId: set.id, weightVal: weight }));
-  };
-
-  const handleChangeReps = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const input = e.currentTarget.value;
-    const reps = !input ? null : +input;
-
-    dispatch(addRepsForSet({ exerciseId, setId: set.id, repsVal: reps }));
-  };
+const SetForm = ({ exerciseIndex, setIndex, removeSet }: SetFormProps) => {
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext<TrainingFormData>();
 
   return (
-    <Box key={set.id} mt={"1rem"}>
+    <Box mt={"1rem"}>
       <Box
         display="flex"
         justifyContent="center"
         alignItems="center"
         gap="1rem"
       >
-        <Typography align="center">Set {number}</Typography>
+        <Typography align="center">Set {setIndex + 1}</Typography>
         <IconButton
-          onClick={() => dispatch(removeSet({ exerciseId, setId: set.id }))}
+          onClick={removeSet}
           size="large"
           edge="start"
           color="inherit"
@@ -61,21 +45,50 @@ const SetForm = ({ exerciseId, set, number }: SetFormProps) => {
       <Grid container spacing={1}>
         <Grid item xs={6}>
           <InputLabel htmlFor="exercise-name">Weight (kg)</InputLabel>
-          <TextField
-            type="number"
-            fullWidth
-            value={set.weight}
-            onChange={handleChangeWeight}
+          <Controller
+            name={`exercises.${exerciseIndex}.sets.${setIndex}.repetitions`}
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <TextField
+                type="number"
+                fullWidth
+                value={value}
+                onChange={onChange}
+              />
+            )}
           />
+          {errors?.exercises?.[exerciseIndex]?.sets?.[setIndex]
+            ?.repetitions && (
+            <Typography variant="caption" color="error">
+              {
+                errors?.exercises?.[exerciseIndex]?.sets?.[setIndex]
+                  ?.repetitions?.message
+              }
+            </Typography>
+          )}
         </Grid>
         <Grid item xs={6}>
-          <InputLabel htmlFor="exercise-name">Reps</InputLabel>
-          <TextField
-            type="number"
-            fullWidth
-            value={set.repetitions}
-            onChange={handleChangeReps}
+          <InputLabel htmlFor="exercise-name">Weight (kg)</InputLabel>
+          <Controller
+            name={`exercises.${exerciseIndex}.sets.${setIndex}.weight`}
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <TextField
+                type="number"
+                fullWidth
+                value={value}
+                onChange={onChange}
+              />
+            )}
           />
+          {errors?.exercises?.[exerciseIndex]?.sets?.[setIndex]?.weight && (
+            <Typography variant="caption" color="error">
+              {
+                errors?.exercises?.[exerciseIndex]?.sets?.[setIndex]?.weight
+                  ?.message
+              }
+            </Typography>
+          )}
         </Grid>
       </Grid>
     </Box>

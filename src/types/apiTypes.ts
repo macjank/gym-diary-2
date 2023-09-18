@@ -1,32 +1,14 @@
-export interface Muscle {
+export interface ApiExerciseCategory {
   id: string;
-  name: string;
-  isDeleted: boolean;
+  name: {
+    [language: string]: string;
+  };
 }
 
-export interface BaseExercise {
+export interface ApiExercise {
   id: string;
-  name: string;
-  muscleId: string;
-  isDeleted: boolean;
-}
-
-export interface TrainingSet {
-  id: string;
-  repetitions: number | null;
-  weight: number | null;
-}
-
-export interface TrainingExercise {
-  id: string;
-  muscleId: string;
-  baseExerciseId: string;
-  sets: TrainingSet[];
-}
-
-export interface Training {
-  id: string;
-  date: string;
-  gym: string;
-  exercises: TrainingExercise[];
+  name: {
+    [language: string]: string;
+  };
+  categories: ApiExerciseCategory[];
 }
