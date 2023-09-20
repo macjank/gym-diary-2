@@ -6,6 +6,8 @@ import Navigation from "./components/navigation/Navigation";
 import { routes } from "./static/routes";
 import TrainingForm from "./pages/addTraining/TrainingForm";
 import FirebaseService from "./services/firebaseService";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "./styles/theme";
 
 function App() {
   useEffect(() => {
@@ -14,13 +16,13 @@ function App() {
   }, []);
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Navigation />
       <Routes>
         <Route path={routes.home} element={<Home />} />
         <Route path={routes.addTraining} element={<TrainingForm />} />
       </Routes>
-    </>
+    </ThemeProvider>
   );
 }
 
