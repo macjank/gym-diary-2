@@ -1,15 +1,19 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Grid, InputLabel, TextField, Typography } from '@mui/material';
+import { Box, Button, Stack } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import Input from '../../../components/inputs/TextInput';
+import FormErrorMessage from '../../../components/messages/FormErrorMessage';
 import { registerFormSchema } from '../../../static/validationSchemas/registerFormSchema';
 import { ApiPasswordRegisterRequest } from '../../../types/apiTypes';
 
 interface RegisterFormProps {
   onSubmitForm: ({ email, password }: ApiPasswordRegisterRequest) => Promise<void>;
+  isLoading: boolean;
 }
+const RegisterForm = ({ onSubmitForm, isLoading }: RegisterFormProps) => {
+  const { t } = useTranslation();
 
-//TODO:
-const RegisterForm = ({ onSubmitForm }: RegisterFormProps) => {
   const {
     handleSubmit,
     control,
@@ -23,43 +27,82 @@ const RegisterForm = ({ onSubmitForm }: RegisterFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <InputLabel htmlFor="email">E-mail</InputLabel>
+    <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ width: '100%' }}>
+      <Stack spacing={2} sx={{ p: 2, maxWidth: '600px', mx: 'auto' }}>
+        <Box>
           <Controller
             name="email"
             control={control}
-            render={({ field }) => <TextField id="email" type="email" {...field} error={!!errors.email} />}
+            render={({ field }) => (
+              <Input
+                inputProps={{
+                  id: 'register-email',
+                  type: 'email',
+                  error: !!errors.email,
+                  label: t('register.emailLabel'),
+                }}
+                formFieldProps={{
+                  ...field,
+                }}
+              />
+            )}
           />
-          {errors['email'] && (
-            <Typography variant="caption" color="error">
-              {errors['email'].message}
-            </Typography>
-          )}
-        </Grid>
+          {!!errors.email && <FormErrorMessage>{t(`errorMessages.form.${errors.email.message}`)}</FormErrorMessage>}
+        </Box>
 
-        <Grid item xs={12}>
-          <InputLabel htmlFor="email">Password</InputLabel>
+        <Box>
           <Controller
             name="password"
             control={control}
-            render={({ field }) => <TextField id="password" type="password" {...field} error={!!errors.password} />}
+            render={({ field }) => (
+              <Input
+                inputProps={{
+                  id: 'register-password',
+                  type: 'password',
+                  error: !!errors.password,
+                  label: t('register.passwordLabel'),
+                }}
+                formFieldProps={{
+                  ...field,
+                }}
+              />
+            )}
           />
-          {errors['password'] && (
-            <Typography variant="caption" color="error">
-              {errors['password'].message}
-            </Typography>
+          {!!errors.password && (
+            <FormErrorMessage>{t(`errorMessages.form.${errors.password.message}`)}</FormErrorMessage>
           )}
-        </Grid>
+        </Box>
 
-        <Grid item xs={12}>
-          <Button type="submit" variant="contained" color="primary">
-            Submit
+        <Box>
+          <Controller
+            name="confirmPassword"
+            control={control}
+            render={({ field }) => (
+              <Input
+                inputProps={{
+                  id: 'register-confirm-password',
+                  type: 'password',
+                  error: !!errors.confirmPassword,
+                  label: t('register.confirmPasswordLabel'),
+                }}
+                formFieldProps={{
+                  ...field,
+                }}
+              />
+            )}
+          />
+          {!!errors.confirmPassword && (
+            <FormErrorMessage>{t(`errorMessages.form.${errors.confirmPassword.message}`)}</FormErrorMessage>
+          )}
+        </Box>
+
+        <Box>
+          <Button type="submit" variant="contained" color="primary" size="large" fullWidth disabled={isLoading}>
+            {t('register.submitBtn')}
           </Button>
-        </Grid>
-      </Grid>
-    </form>
+        </Box>
+      </Stack>
+    </Box>
   );
 };
 

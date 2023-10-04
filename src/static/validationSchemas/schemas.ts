@@ -13,3 +13,10 @@ export const requiredArray = (message: string) => yup.array().required('required
 export const email = yup.string().email('invalidEmail').required('required');
 
 export const password = yup.string().min(8, 'min8Char').required('required');
+
+export const confirmPassword = yup
+  .string()
+  .required('required')
+  .test('differentPasswords', 'differentPasswords', function (val) {
+    return val === this.parent.password;
+  });

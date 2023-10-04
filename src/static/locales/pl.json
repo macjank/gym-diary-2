@@ -1,16 +1,42 @@
 {
   "test": "test",
+  "navigation": {
+    "addTraining": "Nowy trening",
+    "exercisesBase": "Baza ćwiczeń",
+    "logout": "Wyloguj się"
+  },
   "login": {
     "title": "Logowanie",
     "emailLabel": "E-mail",
     "passwordLabel": "Hasło",
-    "submitBtn": "Zaloguj się"
+    "submitBtn": "Zaloguj się",
+    "noAccount": "Nie masz konta?",
+    "registerLinkBtn": "Zarejestruj się"
+  },
+  "register": {
+    "title": "Rejestracja",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Hasło",
+    "confirmPasswordLabel": "Potwierdź hasło",
+    "submitBtn": "Zarejestruj się",
+    "haveAccount": "Masz już konto?",
+    "loginLinkBtn": "Zaloguj się"
   },
   "errorMessages": {
     "api": {
       "loginGeneral": "Nie udało się zalogować",
       "auth/too-many-requests": "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.",
       "auth/invalid-login-credentials": "Invalid login credentials"
+    },
+    "form": {
+      "required": "Pole wymagane",
+      "positiveNum": "Wymagana liczba większa od 0",
+      "invalidEmail": "Niepoprawny adres e-mail",
+      "min8Char": "Wymagane min. 8 znaków",
+      "differentPasswords": "Hasła nie są takie same"
     }
+  },
+  "successMessages": {
+    "register": "Konto zostało utworzone"
   }
 }

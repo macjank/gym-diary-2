@@ -1,4 +1,4 @@
-import { Stack, Typography } from '@mui/material';
+import { Link, Stack, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -36,6 +36,21 @@ const LoginPage = () => {
         {t('login.title')}
       </Typography>
       <LoginForm onSubmitForm={handleSubmitLoginForm} isLoading={isLoading} />
+
+      <Stack sx={{ marginTop: '2rem' }}>
+        <Typography variant="body1" sx={{ marginBottom: '1.5rem' }} gutterBottom textAlign="center">
+          {t('login.noAccount')}
+        </Typography>
+        <Link
+          component="button"
+          variant="body2"
+          onClick={() => {
+            navigate(routes.register);
+          }}
+        >
+          {t('login.registerLinkBtn')}
+        </Link>
+      </Stack>
     </Stack>
   );
 };
