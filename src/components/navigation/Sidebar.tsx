@@ -1,13 +1,21 @@
-import { CloseOutlined } from "@mui/icons-material";
-import { Box, IconButton, MenuItem, MenuList } from "@mui/material";
-import { NavLink } from "react-router-dom";
-import { routes } from "../../static/routes";
+import { CloseOutlined } from '@mui/icons-material';
+import { Box, IconButton, MenuItem, MenuList } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { NavLink } from 'react-router-dom';
+import AuthService from '../../services/auth/AuthService';
+import { routes } from '../../static/routes';
 
 interface SidebarProps {
   closeSidebar: () => void;
 }
 
 const Sidebar = ({ closeSidebar }: SidebarProps) => {
+  const { t } = useTranslation();
+
+  const handleLogout = () => {
+    AuthService.logout();
+  };
+
   return (
     <Box position="relative">
       <IconButton
@@ -16,16 +24,26 @@ const Sidebar = ({ closeSidebar }: SidebarProps) => {
         edge="start"
         color="inherit"
         aria-label="menu"
-        sx={{ position: "absolute", right: "0", top: "0" }}
+        sx={{ position: 'absolute', right: '0', top: '0' }}
       >
         <CloseOutlined />
       </IconButton>
-      <MenuList sx={{ marginTop: "3rem" }}>
+      <MenuList sx={{ marginTop: '3rem' }}>
         <NavLink to={routes.addTraining} onClick={closeSidebar}>
-          <MenuItem sx={{ padding: "1rem 3rem" }}>Add training</MenuItem>
+          <MenuItem sx={{ padding: '1rem 3rem' }}>{t('navigation.addTraining')}</MenuItem>
         </NavLink>
         <NavLink to={routes.exercisesBase} onClick={closeSidebar}>
-          <MenuItem sx={{ padding: "1rem 3rem" }}>Exercises base</MenuItem>
+          <MenuItem sx={{ padding: '1rem 3rem' }}>{t('navigation.exercisesBase')}</MenuItem>
+        </NavLink>
+
+        <NavLink
+          to={routes.login}
+          onClick={() => {
+            closeSidebar();
+            handleLogout();
+          }}
+        >
+          <MenuItem sx={{ padding: '1rem 3rem' }}>{t('navigation.logout')}</MenuItem>
         </NavLink>
       </MenuList>
     </Box>

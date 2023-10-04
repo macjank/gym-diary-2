@@ -1,5 +1,5 @@
 export enum FirebaseCollectionsEnum {
-  ExercisesCategories = "exercisesCategories",
-  Exercises = "exercises",
-  Trainings = "trainings",
+  ExercisesCategories = 'exercisesCategories',
+  Exercises = 'exercises',
+  Trainings = 'trainings',
 }

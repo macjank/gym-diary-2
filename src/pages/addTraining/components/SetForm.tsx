@@ -1,21 +1,16 @@
-import {
-  Box,
-  Grid,
-  IconButton,
-  InputLabel,
-  TextField,
-  Typography,
-} from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import { Controller, useFormContext } from "react-hook-form";
-import { TrainingFormData } from "../TrainingForm";
+import CloseIcon from '@mui/icons-material/Close';
+import { Box, Grid, IconButton, InputLabel, TextField, Typography } from '@mui/material';
+import { Controller, useFormContext } from 'react-hook-form';
+import { TrainingFormData } from '../TrainingForm';
 
 interface SetFormProps {
   exerciseIndex: number;
   setIndex: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   removeSet: any;
 }
 
+//TODO:
 const SetForm = ({ exerciseIndex, setIndex, removeSet }: SetFormProps) => {
   const {
     control,
@@ -23,21 +18,10 @@ const SetForm = ({ exerciseIndex, setIndex, removeSet }: SetFormProps) => {
   } = useFormContext<TrainingFormData>();
 
   return (
-    <Box mt={"1rem"}>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        gap="1rem"
-      >
+    <Box mt={'1rem'}>
+      <Box display="flex" justifyContent="center" alignItems="center" gap="1rem">
         <Typography align="center">Set {setIndex + 1}</Typography>
-        <IconButton
-          onClick={removeSet}
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="close"
-        >
+        <IconButton onClick={removeSet} size="large" edge="start" color="inherit" aria-label="close">
           <CloseIcon />
         </IconButton>
       </Box>
@@ -49,21 +33,12 @@ const SetForm = ({ exerciseIndex, setIndex, removeSet }: SetFormProps) => {
             name={`exercises.${exerciseIndex}.sets.${setIndex}.repetitions`}
             control={control}
             render={({ field: { value, onChange } }) => (
-              <TextField
-                type="number"
-                fullWidth
-                value={value}
-                onChange={onChange}
-              />
+              <TextField type="number" fullWidth value={value} onChange={onChange} />
             )}
           />
-          {errors?.exercises?.[exerciseIndex]?.sets?.[setIndex]
-            ?.repetitions && (
+          {errors?.exercises?.[exerciseIndex]?.sets?.[setIndex]?.repetitions && (
             <Typography variant="caption" color="error">
-              {
-                errors?.exercises?.[exerciseIndex]?.sets?.[setIndex]
-                  ?.repetitions?.message
-              }
+              {errors?.exercises?.[exerciseIndex]?.sets?.[setIndex]?.repetitions?.message}
             </Typography>
           )}
         </Grid>
@@ -73,20 +48,12 @@ const SetForm = ({ exerciseIndex, setIndex, removeSet }: SetFormProps) => {
             name={`exercises.${exerciseIndex}.sets.${setIndex}.weight`}
             control={control}
             render={({ field: { value, onChange } }) => (
-              <TextField
-                type="number"
-                fullWidth
-                value={value}
-                onChange={onChange}
-              />
+              <TextField type="number" fullWidth value={value} onChange={onChange} />
             )}
           />
           {errors?.exercises?.[exerciseIndex]?.sets?.[setIndex]?.weight && (
             <Typography variant="caption" color="error">
-              {
-                errors?.exercises?.[exerciseIndex]?.sets?.[setIndex]?.weight
-                  ?.message
-              }
+              {errors?.exercises?.[exerciseIndex]?.sets?.[setIndex]?.weight?.message}
             </Typography>
           )}
         </Grid>

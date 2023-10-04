@@ -1,25 +1,18 @@
-import {
-  Box,
-  Button,
-  Grid,
-  IconButton,
-  InputLabel,
-  MenuItem,
-  Select,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Grid, IconButton, InputLabel, MenuItem, Select, Typography } from '@mui/material';
 
-import SetForm from "./SetForm";
-import CloseIcon from "@mui/icons-material/Close";
-import { Controller, useFieldArray, useFormContext } from "react-hook-form";
-import { TrainingFormData } from "../TrainingForm";
-import useExercisesCollection from "../../../store/hooks/useExercisesCollection";
+import CloseIcon from '@mui/icons-material/Close';
+import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
+import useExercisesCollection from '../../../store/hooks/useExercisesCollection';
+import { CallbackDefault } from '../../../types/commonTypes';
+import { TrainingFormData } from '../TrainingForm';
+import SetForm from './SetForm';
 
 interface ExerciseFormProps {
   index: number;
-  onRemove: () => void;
+  onRemove: CallbackDefault;
 }
 
+//TODO:
 const ExerciseForm = ({ index, onRemove }: ExerciseFormProps) => {
   const { exercises } = useExercisesCollection();
 
@@ -40,23 +33,11 @@ const ExerciseForm = ({ index, onRemove }: ExerciseFormProps) => {
     append({ repetitions: null, weight: null });
   };
 
-
   return (
-    <Grid mt={"2rem"}>
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        mb="1rem"
-      >
+    <Grid mt={'2rem'}>
+      <Box display="flex" justifyContent="space-between" alignItems="center" mb="1rem">
         <Typography variant="h6">Exercise</Typography>
-        <IconButton
-          onClick={onRemove}
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="close"
-        >
+        <IconButton onClick={onRemove} size="large" edge="start" color="inherit" aria-label="close">
           <CloseIcon />
         </IconButton>
       </Box>
@@ -68,14 +49,14 @@ const ExerciseForm = ({ index, onRemove }: ExerciseFormProps) => {
         render={({ field: { value, onChange } }) => (
           <Select
             id="exercise-name"
-            sx={{ width: "100%" }}
+            sx={{ width: '100%' }}
             value={value}
             onChange={onChange}
             error={!!errors?.exercises?.[index]?.exerciseName}
           >
-            {exercises.map((ex) => (
+            {exercises.map(ex => (
               <MenuItem key={ex.id} value={ex.id}>
-                {ex.name["pl"]}
+                {ex.name['pl']}
               </MenuItem>
             ))}
           </Select>
@@ -95,15 +76,10 @@ const ExerciseForm = ({ index, onRemove }: ExerciseFormProps) => {
       )}
 
       {sets.map((set, setIndex) => (
-        <SetForm
-          key={set.id}
-          exerciseIndex={index}
-          setIndex={setIndex}
-          removeSet={() => remove(setIndex)}
-        />
+        <SetForm key={set.id} exerciseIndex={index} setIndex={setIndex} removeSet={() => remove(setIndex)} />
       ))}
 
-      <Button sx={{ marginTop: "1rem", width: "100%" }} onClick={addSet}>
+      <Button sx={{ marginTop: '1rem', width: '100%' }} onClick={addSet}>
         Add set
       </Button>
     </Grid>

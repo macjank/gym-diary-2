@@ -1,20 +1,16 @@
-import { AppBar, Drawer, IconButton, Toolbar, Typography } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import { useState } from "react";
-import Sidebar from "./Sidebar";
-import { NavLink } from "react-router-dom";
-import { routes } from "../../static/routes";
+import MenuIcon from '@mui/icons-material/Menu';
+import { AppBar, Drawer, IconButton, Toolbar, Typography } from '@mui/material';
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { routes } from '../../static/routes';
+import Sidebar from './Sidebar';
 
 const Navigation = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
     <>
-      <Drawer
-        open={isSidebarOpen}
-        onClose={() => setIsSidebarOpen(false)}
-        anchor="right"
-      >
+      <Drawer open={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} anchor="right">
         <Sidebar closeSidebar={() => setIsSidebarOpen(false)} />
       </Drawer>
       <AppBar position="static">

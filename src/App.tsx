@@ -1,28 +1,49 @@
-import React, { useEffect } from "react";
-import "./App.css";
-import { Routes, Route } from "react-router-dom";
-import Home from "./pages/home/Home";
-import Navigation from "./components/navigation/Navigation";
-import { routes } from "./static/routes";
-import TrainingForm from "./pages/addTraining/TrainingForm";
-import FirebaseService from "./services/firebaseService";
-import { ThemeProvider } from "@mui/material";
-import { theme } from "./styles/theme";
+import { ThemeProvider } from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { useEffect } from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+
+import FirebaseService from './services/firebaseService';
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import AppRoutes from './routes/AppRoutes';
+import store from './store';
+import { theme } from './styles/theme';
 
 function App() {
+  //TODO:
   useEffect(() => {
     FirebaseService.getExercisesCategories();
     FirebaseService.getExercises();
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <Navigation />
-      <Routes>
-        <Route path={routes.home} element={<Home />} />
-        <Route path={routes.addTraining} element={<TrainingForm />} />
-      </Routes>
-    </ThemeProvider>
+    <>
+      <Provider store={store}>
+        <BrowserRouter>
+          <ThemeProvider theme={theme}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <AppRoutes />
+            </LocalizationProvider>
+          </ThemeProvider>
+        </BrowserRouter>
+      </Provider>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+    </>
   );
 }
 

@@ -1,16 +1,12 @@
-import { Button, Grid, Input, InputLabel, Typography } from "@mui/material";
-import ContentWrapper from "../../components/wrappers/ContentWrapper";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Button, Grid, Typography } from '@mui/material';
+import ContentWrapper from '../../components/wrappers/ContentWrapper';
 
-import ExerciseForm from "./components/ExerciseForm";
-import {
-  useForm,
-  Controller,
-  useFieldArray,
-  FormProvider,
-} from "react-hook-form";
-import { trainingFormSchema } from "../../static/validationSchemas/trainingFormSchema";
-import { useEffect } from "react";
+import { DatePicker } from '@mui/x-date-pickers';
+import { useEffect } from 'react';
+import { Controller, FormProvider, useFieldArray, useForm } from 'react-hook-form';
+import { trainingFormSchema } from '../../static/validationSchemas/trainingFormSchema';
+import ExerciseForm from './components/ExerciseForm';
 
 export interface TrainingFormData {
   exercises: {
@@ -22,6 +18,7 @@ export interface TrainingFormData {
   }[];
 }
 
+//TODO:
 const TrainingForm = () => {
   const methods = useForm({
     resolver: yupResolver(trainingFormSchema),
@@ -35,13 +32,14 @@ const TrainingForm = () => {
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "exercises",
+    name: 'exercises',
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (data: any) => console.log(data);
 
   const addExercise = () => {
-    append({ exerciseName: "", sets: [] });
+    append({ exerciseName: '', sets: [] });
   };
 
   useEffect(() => {
@@ -50,30 +48,31 @@ const TrainingForm = () => {
 
   return (
     <ContentWrapper>
-      <Typography variant="h5" sx={{ marginBottom: "1.5rem" }} gutterBottom>
+      <Typography variant="h5" sx={{ marginBottom: '1.5rem' }} gutterBottom>
         New training
       </Typography>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <InputLabel htmlFor="date">Date</InputLabel>
               <Controller
                 name="date"
                 control={control}
-                rules={{ required: "Date is required" }}
+                //TODO: dodać do walidacji yupowej
+                rules={{ required: 'Date is required' }}
                 render={({ field }) => (
-                  <Input
-                    id="date"
-                    type="date"
-                    {...field}
-                    error={!!errors.date}
-                  />
+                  <DatePicker label="Date" {...field} />
+                  // <Input
+                  //   id="date"
+                  //   type="date"
+                  //   {...field}
+                  //   error={!!errors.date}
+                  // />
                 )}
               />
-              {errors["date"] && (
+              {errors['date'] && (
                 <Typography variant="caption" color="error">
-                  {errors["date"].message}
+                  {errors['date'].message}
                 </Typography>
               )}
             </Grid>
@@ -86,11 +85,7 @@ const TrainingForm = () => {
 
             <Grid item xs={12}>
               {fields.map((exercise, index) => (
-                <ExerciseForm
-                  key={exercise.id}
-                  index={index}
-                  onRemove={() => remove(index)}
-                />
+                <ExerciseForm key={exercise.id} index={index} onRemove={() => remove(index)} />
               ))}
             </Grid>
 
@@ -99,12 +94,7 @@ const TrainingForm = () => {
                 Submit
               </Button>
 
-              <Button
-                type="button"
-                variant="contained"
-                color="primary"
-                onClick={addExercise}
-              >
+              <Button type="button" variant="contained" color="primary" onClick={addExercise}>
                 Dodaj ćwiczenie
               </Button>
             </Grid>

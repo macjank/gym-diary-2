@@ -1,0 +1,20 @@
+{
+  "plugins": ["@typescript-eslint", "jest"],
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "prettier",
+    "plugin:jest/recommended",
+    "plugin:jest/style",
+    "plugin:testing-library/react"
+  ],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@next/next/no-sync-scripts": "off",
+    "react/react-in-jsx-scope": "off",
+    "reat/prop-types": "off"
+  }
+}

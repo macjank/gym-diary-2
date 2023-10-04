@@ -1,0 +1,16 @@
+{
+  "test": "test",
+  "login": {
+    "title": "Logowanie",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Hasło",
+    "submitBtn": "Zaloguj się"
+  },
+  "errorMessages": {
+    "api": {
+      "loginGeneral": "Nie udało się zalogować",
+      "auth/too-many-requests": "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.",
+      "auth/invalid-login-credentials": "Invalid login credentials"
+    }
+  }
+}

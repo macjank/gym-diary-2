@@ -1,6 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
-import exercisesCollectionSlice from "./slices/exercisesCollectionSlice";
-import exercisesCategoriesCollectionSlice from "./slices/exercisesCategoriesCollectionSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import exercisesCategoriesCollectionSlice from './slices/exercisesCategoriesCollectionSlice';
+import exercisesCollectionSlice from './slices/exercisesCollectionSlice';
 
 const store = configureStore({
   reducer: {
