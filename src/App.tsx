@@ -11,6 +11,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AppRoutes from './routes/AppRoutes';
 import store from './store';
+import './styles/global.css';
 import { theme } from './styles/theme';
 
 function App() {

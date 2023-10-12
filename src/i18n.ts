@@ -4,6 +4,7 @@ import { initReactI18next } from 'react-i18next';
 
 import en from '../src/static/locales/en.json';
 import pl from '../src/static/locales/pl.json';
+import { Lang } from './types/globalTypes';
 
 declare module 'i18next' {
   interface CustomTypeOptions {
@@ -16,7 +17,7 @@ i18n
   .use(initReactI18next)
   .init({
     debug: true,
-    fallbackLng: 'pl',
+    fallbackLng: Lang.PL,
     returnNull: false,
     interpolation: {
       escapeValue: false,

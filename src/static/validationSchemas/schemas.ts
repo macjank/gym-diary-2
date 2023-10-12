@@ -5,7 +5,7 @@ export const requiredString = yup.string().required('required');
 export const requiredPositiveNumber = yup
   .number()
   .transform(value => (Number.isNaN(value) ? null : value))
-  .positive('required')
+  .positive('positiveNumber')
   .required('required');
 
 export const requiredArray = (message: string) => yup.array().required('required').min(1, message);
@@ -20,3 +20,13 @@ export const confirmPassword = yup
   .test('differentPasswords', 'differentPasswords', function (val) {
     return val === this.parent.password;
   });
+
+export const trainingSet = yup.object().shape({
+  repetitions: requiredPositiveNumber,
+  weight: requiredPositiveNumber,
+});
+
+export const trainingExercise = yup.object().shape({
+  name: requiredString,
+  sets: yup.array().of(trainingSet).required('required').min(1, 'setsRequired'),
+});

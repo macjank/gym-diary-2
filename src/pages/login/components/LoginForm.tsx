@@ -50,7 +50,7 @@ const LoginForm = ({ onPasswordLogin, onGoogleLogin, isLoading }: LoginFormProps
               />
             )}
           />
-          {!!errors.email && <FormErrorMessage>{t(`errorMessages.form.${errors.email.message}`)}</FormErrorMessage>}
+          <FormErrorMessage errors={errors} name="email" />
         </Box>
 
         <Box>
@@ -71,9 +71,7 @@ const LoginForm = ({ onPasswordLogin, onGoogleLogin, isLoading }: LoginFormProps
               />
             )}
           />
-          {!!errors.password && (
-            <FormErrorMessage>{t(`errorMessages.form.${errors.password.message}`)}</FormErrorMessage>
-          )}
+          <FormErrorMessage errors={errors} name="password" />
         </Box>
 
         <Stack gap={1}>

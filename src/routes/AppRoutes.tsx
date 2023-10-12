@@ -5,8 +5,8 @@ import TrainingForm from '../pages/addTraining/TrainingForm';
 import Home from '../pages/home/HomePage';
 import Login from '../pages/login/LoginPage';
 import Register from '../pages/register/RegisterPage';
-import { paths } from '../static/routes';
 import ProtectedRoute from './ProtectedRoute';
+import { paths } from './routes';
 
 const withLayout = (Component: React.ReactNode) => <MainLayout>{Component}</MainLayout>;
 

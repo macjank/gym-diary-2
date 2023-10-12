@@ -2,8 +2,8 @@ import { CloseOutlined } from '@mui/icons-material';
 import { Box, IconButton, MenuItem, MenuList } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
+import { routes } from '../../routes/routes';
 import AuthService from '../../services/auth/AuthService';
-import { routes } from '../../static/routes';
 
 interface SidebarProps {
   closeSidebar: () => void;

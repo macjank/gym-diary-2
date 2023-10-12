@@ -1,27 +1,45 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Grid, Typography } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 import ContentWrapper from '../../components/wrappers/ContentWrapper';
 
-import { DatePicker } from '@mui/x-date-pickers';
-import { useEffect } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, FormProvider, useFieldArray, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import BottomActionBox from '../../components/bottomActionBox/BottomActionBox';
+import CustomDatePicker from '../../components/inputs/CustomDatePicker';
+import FormErrorMessage from '../../components/messages/FormErrorMessage';
 import { trainingFormSchema } from '../../static/validationSchemas/trainingFormSchema';
 import ExerciseForm from './components/ExerciseForm';
 
 export interface TrainingFormData {
+  date: Date;
   exercises: {
-    exerciseName: string;
+    name: string;
     sets: {
-      repetitions: number | null;
-      weight: number | null;
+      repetitions: number;
+      weight: number;
     }[];
   }[];
 }
 
-//TODO:
 const TrainingForm = () => {
-  const methods = useForm({
+  const { t } = useTranslation();
+
+  const methods = useForm<TrainingFormData>({
     resolver: yupResolver(trainingFormSchema),
+    defaultValues: {
+      date: new Date(),
+      exercises: [
+        {
+          name: '',
+          sets: [
+            {
+              repetitions: 0,
+              weight: 0,
+            },
+          ],
+        },
+      ],
+    },
   });
 
   const {
@@ -35,72 +53,62 @@ const TrainingForm = () => {
     name: 'exercises',
   });
 
+  //TODO:
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (data: any) => console.log(data);
 
   const addExercise = () => {
-    append({ exerciseName: '', sets: [] });
+    append({
+      name: '',
+      sets: [],
+    });
   };
-
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
 
   return (
     <ContentWrapper>
       <Typography variant="h5" sx={{ marginBottom: '1.5rem' }} gutterBottom>
-        New training
+        {t('addTraining.title')}
       </Typography>
+
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
+          <Stack pb="6rem">
+            <Stack>
               <Controller
                 name="date"
                 control={control}
-                //TODO: dodać do walidacji yupowej
-                rules={{ required: 'Date is required' }}
                 render={({ field }) => (
-                  <DatePicker label="Date" {...field} />
-                  // <Input
-                  //   id="date"
-                  //   type="date"
-                  //   {...field}
-                  //   error={!!errors.date}
-                  // />
+                  <CustomDatePicker
+                    label={t('trainingForm.dateLabel')}
+                    value={field.value}
+                    setValue={val => field.onChange(val)}
+                  />
                 )}
               />
-              {errors['date'] && (
-                <Typography variant="caption" color="error">
-                  {errors['date'].message}
-                </Typography>
-              )}
-            </Grid>
+              <FormErrorMessage errors={errors} name="date" />
+            </Stack>
 
-            {!!errors.exercises && (
-              <Typography variant="caption" color="error">
-                {errors.exercises.message || errors.exercises?.root?.message}
-              </Typography>
-            )}
+            <FormErrorMessage errors={errors} name="exercises" />
 
-            <Grid item xs={12}>
+            <Stack>
               {fields.map((exercise, index) => (
                 <ExerciseForm key={exercise.id} index={index} onRemove={() => remove(index)} />
               ))}
-            </Grid>
-
-            <Grid item xs={12}>
-              <Button type="submit" variant="contained" color="primary">
-                Submit
-              </Button>
-
-              <Button type="button" variant="contained" color="primary" onClick={addExercise}>
-                Dodaj ćwiczenie
-              </Button>
-            </Grid>
-          </Grid>
+            </Stack>
+          </Stack>
         </form>
       </FormProvider>
+
+      <BottomActionBox>
+        <Stack gap={1}>
+          <Button type="button" variant="outlined" color="primary" onClick={addExercise}>
+            {t('trainingForm.addExerciseBtn')}
+          </Button>
+          <Button type="submit" variant="contained" color="primary" onClick={handleSubmit(onSubmit)}>
+            {t('trainingForm.submitFormBtn')}
+          </Button>
+        </Stack>
+      </BottomActionBox>
     </ContentWrapper>
   );
 };

@@ -47,7 +47,7 @@ const RegisterForm = ({ onSubmitForm, isLoading }: RegisterFormProps) => {
               />
             )}
           />
-          {!!errors.email && <FormErrorMessage>{t(`errorMessages.form.${errors.email.message}`)}</FormErrorMessage>}
+          <FormErrorMessage errors={errors} name="email" />
         </Box>
 
         <Box>
@@ -68,9 +68,7 @@ const RegisterForm = ({ onSubmitForm, isLoading }: RegisterFormProps) => {
               />
             )}
           />
-          {!!errors.password && (
-            <FormErrorMessage>{t(`errorMessages.form.${errors.password.message}`)}</FormErrorMessage>
-          )}
+          <FormErrorMessage errors={errors} name="password" />
         </Box>
 
         <Box>
@@ -91,9 +89,10 @@ const RegisterForm = ({ onSubmitForm, isLoading }: RegisterFormProps) => {
               />
             )}
           />
-          {!!errors.confirmPassword && (
+          {/* {!!errors.confirmPassword && (
             <FormErrorMessage>{t(`errorMessages.form.${errors.confirmPassword.message}`)}</FormErrorMessage>
-          )}
+          )} */}
+          <FormErrorMessage errors={errors} name="confirmPassword" />
         </Box>
 
         <Box>
