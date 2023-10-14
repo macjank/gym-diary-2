@@ -1,3 +1,4 @@
+import { LinearProgress } from '@mui/material';
 import { Navigate, Outlet } from 'react-router-dom';
 import useIsAuthenticated from '../hooks/useIsAuthenticated';
 import { routes } from './routes';
@@ -6,8 +7,11 @@ const ProtectedRoute = () => {
   const { isAuthenticated, isLoading } = useIsAuthenticated();
 
   if (isLoading) {
-    //TODO:
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <LinearProgress />
+      </div>
+    );
   }
 
   if (isAuthenticated === false) {

@@ -1,12 +1,12 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import MainLayout from '../components/layouts/MainLayout';
 import TrainingForm from '../pages/addTraining/TrainingForm';
 import Home from '../pages/home/HomePage';
 import Login from '../pages/login/LoginPage';
 import Register from '../pages/register/RegisterPage';
 import ProtectedRoute from './ProtectedRoute';
-import { paths } from './routes';
+import { paths, routes } from './routes';
 
 const withLayout = (Component: React.ReactNode) => <MainLayout>{Component}</MainLayout>;
 
@@ -15,12 +15,14 @@ const AppRoutes = () => {
     <Routes>
       <Route path={paths.login} element={<Login />} />
       <Route path={paths.register} element={<Register />} />
-
       <Route element={<ProtectedRoute />}>
         <Route path={paths.home} element={withLayout(<Home />)} />
       </Route>
       <Route element={<ProtectedRoute />}>
         <Route path={paths.addTraining} element={withLayout(<TrainingForm />)} />
+      </Route>
+      <Route element={<ProtectedRoute />}>
+        <Route path={'*'} element={withLayout(<Navigate to={routes.home} />)} />
       </Route>
     </Routes>
   );

@@ -30,10 +30,9 @@ const Sidebar = ({ closeSidebar }: SidebarProps) => {
       </IconButton>
       <MenuList sx={{ marginTop: '3rem' }}>
         <NavLink to={routes.addTraining} onClick={closeSidebar}>
-          <MenuItem sx={{ padding: '1rem 3rem' }}>{t('navigation.addTraining')}</MenuItem>
-        </NavLink>
-        <NavLink to={routes.exercisesBase} onClick={closeSidebar}>
-          <MenuItem sx={{ padding: '1rem 3rem' }}>{t('navigation.exercisesBase')}</MenuItem>
+          <MenuItem divider sx={{ padding: '1rem 3rem' }}>
+            {t('navigation.addTraining')}
+          </MenuItem>
         </NavLink>
 
         <NavLink
@@ -43,7 +42,9 @@ const Sidebar = ({ closeSidebar }: SidebarProps) => {
             handleLogout();
           }}
         >
-          <MenuItem sx={{ padding: '1rem 3rem' }}>{t('navigation.logout')}</MenuItem>
+          <MenuItem divider sx={{ padding: '1rem 3rem' }}>
+            {t('navigation.logout')}
+          </MenuItem>
         </NavLink>
       </MenuList>
     </Box>
