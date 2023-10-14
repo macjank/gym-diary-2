@@ -5,11 +5,10 @@ import { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-import FirebaseService from './services/firebaseService';
-
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AppRoutes from './routes/AppRoutes';
+import TrainingsService from './services/trainings/TrainingsService';
 import store from './store';
 import './styles/global.css';
 import { theme } from './styles/theme';
@@ -17,8 +16,8 @@ import { theme } from './styles/theme';
 function App() {
   //TODO:
   useEffect(() => {
-    FirebaseService.getExercisesCategories();
-    FirebaseService.getExercises();
+    TrainingsService.getExercisesCategories();
+    TrainingsService.getExercises();
   }, []);
 
   return (

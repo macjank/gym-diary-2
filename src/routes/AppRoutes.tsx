@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import MainLayout from '../components/layouts/MainLayout';
-import TrainingForm from '../pages/addTraining/TrainingForm';
+import AddTraining from '../pages/addTraining/AddTraining';
 import Home from '../pages/home/HomePage';
 import Login from '../pages/login/LoginPage';
 import Register from '../pages/register/RegisterPage';
@@ -19,7 +19,7 @@ const AppRoutes = () => {
         <Route path={paths.home} element={withLayout(<Home />)} />
       </Route>
       <Route element={<ProtectedRoute />}>
-        <Route path={paths.addTraining} element={withLayout(<TrainingForm />)} />
+        <Route path={paths.addTraining} element={withLayout(<AddTraining />)} />
       </Route>
       <Route element={<ProtectedRoute />}>
         <Route path={'*'} element={withLayout(<Navigate to={routes.home} />)} />

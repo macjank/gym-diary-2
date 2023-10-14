@@ -27,8 +27,6 @@ const ExerciseForm = ({ index, onRemove }: ExerciseFormProps) => {
 
   const { exercises } = useExercisesCollection();
 
-  console.log(exercises);
-
   const {
     control,
     formState: { errors },

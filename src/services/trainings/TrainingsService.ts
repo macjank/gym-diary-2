@@ -1,14 +1,12 @@
 import { addDoc, collection, getDocs } from 'firebase/firestore';
-import { db } from '../firebase/config';
-import store from '../store';
-import { setExercisesCategories } from '../store/slices/exercisesCategoriesCollectionSlice';
-import { setExercises } from '../store/slices/exercisesCollectionSlice';
-import { ApiExercise, ApiExerciseCategory } from '../types/apiTypes';
-import { FirebaseCollectionsEnum } from '../types/firebaseCollectionsEnum';
-import { Training } from '../types/trainingTypes';
+import { db } from '../../firebase/config';
+import store from '../../store';
+import { setExercisesCategories } from '../../store/slices/exercisesCategoriesCollectionSlice';
+import { setExercises } from '../../store/slices/exercisesCollectionSlice';
+import { ApiAddTrainingRequest, ApiExercise, ApiExerciseCategory } from '../../types/apiTypes';
+import { FirebaseCollectionsEnum } from '../../types/firebaseCollectionsEnum';
 
-//TODO: rename
-class FirebaseService {
+class TrainingsService {
   static async getExercisesCategories() {
     const querySnapshot = await getDocs(collection(db, FirebaseCollectionsEnum.ExercisesCategories));
 
@@ -35,15 +33,11 @@ class FirebaseService {
     store.dispatch(setExercises({ exercises }));
   }
 
-  static async addTraining(training: Training) {
-    try {
-      await addDoc(collection(db, FirebaseCollectionsEnum.Trainings), {
-        ...training,
-      });
-    } catch (e) {
-      console.error('Error adding document: ', e);
-    }
+  static async addTraining(training: ApiAddTrainingRequest) {
+    await addDoc(collection(db, FirebaseCollectionsEnum.Trainings), {
+      ...training,
+    });
   }
 }
 
-export default FirebaseService;
+export default TrainingsService;
