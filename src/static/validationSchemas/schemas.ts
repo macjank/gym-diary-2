@@ -22,11 +22,12 @@ export const confirmPassword = yup
   });
 
 export const trainingSet = yup.object().shape({
+  id: requiredString,
   repetitions: requiredPositiveNumber,
   weight: requiredPositiveNumber,
 });
 
 export const trainingExercise = yup.object().shape({
-  name: requiredString,
+  exerciseId: requiredString,
   sets: yup.array().of(trainingSet).required('required').min(1, 'setsRequired'),
 });

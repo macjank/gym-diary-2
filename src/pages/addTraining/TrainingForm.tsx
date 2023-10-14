@@ -1,23 +1,21 @@
-import { Button, Stack, Typography } from '@mui/material';
-import ContentWrapper from '../../components/wrappers/ContentWrapper';
-
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Button, Stack, Typography } from '@mui/material';
 import { Controller, FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { v4 as uuidv4 } from 'uuid';
 import BottomActionBox from '../../components/bottomActionBox/BottomActionBox';
 import CustomDatePicker from '../../components/inputs/CustomDatePicker';
 import FormErrorMessage from '../../components/messages/FormErrorMessage';
+import ContentWrapper from '../../components/wrappers/ContentWrapper';
 import { trainingFormSchema } from '../../static/validationSchemas/trainingFormSchema';
+import { TrainingSet } from '../../types/trainingTypes';
 import ExerciseForm from './components/ExerciseForm';
 
 export interface TrainingFormData {
   date: Date;
   exercises: {
-    name: string;
-    sets: {
-      repetitions: number;
-      weight: number;
-    }[];
+    exerciseId: string;
+    sets: TrainingSet[];
   }[];
 }
 
@@ -30,9 +28,10 @@ const TrainingForm = () => {
       date: new Date(),
       exercises: [
         {
-          name: '',
+          exerciseId: '',
           sets: [
             {
+              id: uuidv4(),
               repetitions: 0,
               weight: 0,
             },
@@ -59,7 +58,7 @@ const TrainingForm = () => {
 
   const addExercise = () => {
     append({
-      name: '',
+      exerciseId: '',
       sets: [],
     });
   };
@@ -97,18 +96,18 @@ const TrainingForm = () => {
             </Stack>
           </Stack>
         </form>
-      </FormProvider>
 
-      <BottomActionBox>
-        <Stack gap={1}>
-          <Button type="button" variant="outlined" color="primary" onClick={addExercise}>
-            {t('trainingForm.addExerciseBtn')}
-          </Button>
-          <Button type="submit" variant="contained" color="primary" onClick={handleSubmit(onSubmit)}>
-            {t('trainingForm.submitFormBtn')}
-          </Button>
-        </Stack>
-      </BottomActionBox>
+        <BottomActionBox>
+          <Stack gap={1}>
+            <Button type="button" variant="outlined" color="primary" onClick={addExercise}>
+              {t('trainingForm.addExerciseBtn')}
+            </Button>
+            <Button type="submit" variant="contained" color="primary" onClick={handleSubmit(onSubmit)}>
+              {t('trainingForm.submitFormBtn')}
+            </Button>
+          </Stack>
+        </BottomActionBox>
+      </FormProvider>
     </ContentWrapper>
   );
 };
