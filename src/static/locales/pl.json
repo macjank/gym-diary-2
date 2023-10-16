@@ -10,6 +10,7 @@
     "emailLabel": "E-mail",
     "passwordLabel": "Hasło",
     "submitBtn": "Zaloguj się",
+    "googleLogin": "Zaloguj się z Google",
     "noAccount": "Nie masz konta?",
     "registerLinkBtn": "Zarejestruj się"
   },
@@ -22,9 +23,24 @@
     "haveAccount": "Masz już konto?",
     "loginLinkBtn": "Zaloguj się"
   },
+  "addTraining": {
+    "title": "Nowy trening"
+  },
+  "trainingForm": {
+    "dateLabel": "Data",
+    "addExerciseBtn": "Dodaj ćwiczenie",
+    "submitFormBtn": "Zapisz trening",
+    "exerciseNameLabel": "Nazwa ćwiczenia",
+    "addSetBtn": "Dodaj serię",
+    "exerciseTitle": "Ćwiczenie",
+    "setTitle": "Seria",
+    "setWeightLabel": "Masa (kg)",
+    "setRepsLabel": "Powtórzenia"
+  },
   "errorMessages": {
     "api": {
       "loginGeneral": "Nie udało się zalogować",
+      "addTrainingGeneral": "Nie udało się zapisać treningu",
       "auth/too-many-requests": "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.",
       "auth/invalid-login-credentials": "Invalid login credentials"
     },
@@ -33,10 +49,14 @@
       "positiveNum": "Wymagana liczba większa od 0",
       "invalidEmail": "Niepoprawny adres e-mail",
       "min8Char": "Wymagane min. 8 znaków",
-      "differentPasswords": "Hasła nie są takie same"
+      "differentPasswords": "Hasła nie są takie same",
+      "setsRequired": "Dodaj min. 1 serię",
+      "exercisesRequired": "Dodaj min. 1 ćwiczenie",
+      "positiveNumber": "Zbyt mała wartość"
     }
   },
   "successMessages": {
-    "register": "Konto zostało utworzone"
+    "register": "Konto zostało utworzone",
+    "newTrainingAdded": "Trening został dodany"
   }
 }

@@ -22,3 +22,14 @@ export interface ApiPasswordRegisterRequest {
   email: string;
   password: string;
 }
+
+export interface ApiAddTrainingRequest {
+  date: Date;
+  exercises: {
+    exerciseId: string;
+    sets: {
+      repetitions: number;
+      weight: number;
+    }[];
+  }[];
+}

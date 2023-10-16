@@ -2,7 +2,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { AppBar, Drawer, IconButton, Toolbar, Typography } from '@mui/material';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { routes } from '../../static/routes';
+import { routes } from '../../routes/routes';
 import Sidebar from './Sidebar';
 
 const Navigation = () => {

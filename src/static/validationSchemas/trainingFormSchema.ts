@@ -3,15 +3,5 @@ import * as Schema from './schemas';
 
 export const trainingFormSchema = yup.object().shape({
   date: yup.date().required('required'),
-  exercises: Schema.requiredArray('exercises list is required').of(
-    yup.object().shape({
-      exerciseName: Schema.requiredString,
-      sets: Schema.requiredArray('set list is required').of(
-        yup.object().shape({
-          repetitions: Schema.requiredPositiveNumber,
-          weight: Schema.requiredPositiveNumber,
-        }),
-      ),
-    }),
-  ),
+  exercises: yup.array().of(Schema.trainingExercise).required('required').min(1, 'exercisesRequired'),
 });

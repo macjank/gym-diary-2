@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import useToast from '../../hooks/useToast';
+import { routes } from '../../routes/routes';
 import AuthService from '../../services/auth/AuthService';
-import { routes } from '../../static/routes';
 import { ApiPasswordLoginRequest } from '../../types/apiTypes';
 import { getApiErrorMessage } from '../../utils/handleApiError/handleApiError';
 import LoginForm from './components/LoginForm';
@@ -30,12 +30,26 @@ const LoginPage = () => {
     }
   };
 
+  const handleGoogleLogin = async () => {
+    try {
+      setIsLoading(true);
+      await AuthService.logInWithGoogle();
+      setIsLoading(false);
+
+      navigate(routes.home);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <Stack sx={{ height: '100vh', justifyContent: 'center', px: 4 }}>
       <Typography variant="h5" sx={{ marginBottom: '1.5rem' }} gutterBottom textAlign="center">
         {t('login.title')}
       </Typography>
-      <LoginForm onSubmitForm={handleSubmitLoginForm} isLoading={isLoading} />
+      <LoginForm onPasswordLogin={handleSubmitLoginForm} onGoogleLogin={handleGoogleLogin} isLoading={isLoading} />
 
       <Stack sx={{ marginTop: '2rem' }}>
         <Typography variant="body1" sx={{ marginBottom: '1.5rem' }} gutterBottom textAlign="center">

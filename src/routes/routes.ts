@@ -3,7 +3,7 @@ export const routes = {
   login: '/login',
   register: '/register',
   addTraining: '/add-training',
-  exercisesBase: '/exercises-base',
+  // exercisesBase: '/exercises-base',
 };
 
 export const paths = {
@@ -11,5 +11,5 @@ export const paths = {
   login: '/login',
   register: '/register',
   addTraining: '/add-training',
-  exercisesBase: '/exercises-base',
+  // exercisesBase: '/exercises-base',
 };

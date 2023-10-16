@@ -1,7 +1,7 @@
 export interface TrainingSet {
   id: string;
-  repetitions: number | null;
-  weight: number | null;
+  repetitions: number;
+  weight: number;
 }
 
 export interface TrainingExercise {

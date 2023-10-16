@@ -1,4 +1,5 @@
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { googleProvider } from '../../firebase/config';
 import { ApiPasswordLoginRequest, ApiPasswordRegisterRequest } from '../../types/apiTypes';
 
 const auth = getAuth();
@@ -24,6 +25,10 @@ class AuthService {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  static async logInWithGoogle() {
+    await signInWithPopup(auth, googleProvider);
   }
 }
 

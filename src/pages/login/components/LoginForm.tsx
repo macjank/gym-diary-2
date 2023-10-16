@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Google } from '@mui/icons-material';
 import { Box, Button, Stack } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -6,12 +7,14 @@ import Input from '../../../components/inputs/TextInput';
 import FormErrorMessage from '../../../components/messages/FormErrorMessage';
 import { loginFormSchema } from '../../../static/validationSchemas/loginFormSchema';
 import { ApiPasswordLoginRequest } from '../../../types/apiTypes';
+import { CallbackDefault } from '../../../types/commonTypes';
 
 interface LoginFormProps {
-  onSubmitForm: ({ email, password }: ApiPasswordLoginRequest) => Promise<void>;
+  onPasswordLogin: ({ email, password }: ApiPasswordLoginRequest) => Promise<void>;
+  onGoogleLogin: CallbackDefault;
   isLoading: boolean;
 }
-const LoginForm = ({ onSubmitForm, isLoading }: LoginFormProps) => {
+const LoginForm = ({ onPasswordLogin, onGoogleLogin, isLoading }: LoginFormProps) => {
   const { t } = useTranslation();
 
   const {
@@ -23,7 +26,7 @@ const LoginForm = ({ onSubmitForm, isLoading }: LoginFormProps) => {
   });
 
   const onSubmit = async ({ email, password }: ApiPasswordLoginRequest) => {
-    await onSubmitForm({ email, password });
+    await onPasswordLogin({ email, password });
   };
 
   return (
@@ -47,7 +50,7 @@ const LoginForm = ({ onSubmitForm, isLoading }: LoginFormProps) => {
               />
             )}
           />
-          {!!errors.email && <FormErrorMessage>{t(`errorMessages.form.${errors.email.message}`)}</FormErrorMessage>}
+          <FormErrorMessage errors={errors} name="email" />
         </Box>
 
         <Box>
@@ -68,16 +71,18 @@ const LoginForm = ({ onSubmitForm, isLoading }: LoginFormProps) => {
               />
             )}
           />
-          {!!errors.password && (
-            <FormErrorMessage>{t(`errorMessages.form.${errors.password.message}`)}</FormErrorMessage>
-          )}
+          <FormErrorMessage errors={errors} name="password" />
         </Box>
 
-        <Box>
+        <Stack gap={1}>
           <Button type="submit" variant="contained" color="primary" size="large" fullWidth disabled={isLoading}>
             {t('login.submitBtn')}
           </Button>
-        </Box>
+
+          <Button onClick={onGoogleLogin} variant="outlined" color="primary" fullWidth startIcon={<Google />}>
+            {t('login.googleLogin')}
+          </Button>
+        </Stack>
       </Stack>
     </Box>
   );
