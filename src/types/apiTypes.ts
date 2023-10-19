@@ -1,16 +1,18 @@
-export interface ApiExerciseCategory {
+import { ITrainingAdd } from './trainingTypes';
+
+export interface ApiBaseExerciseCategory {
   id: string;
   name: {
     [language: string]: string;
   };
 }
 
-export interface ApiExercise {
+export interface ApiBaseExercise {
   id: string;
   name: {
     [language: string]: string;
   };
-  categories: ApiExerciseCategory[];
+  categories: ApiBaseExerciseCategory[];
 }
 
 export interface ApiPasswordLoginRequest {
@@ -23,13 +25,6 @@ export interface ApiPasswordRegisterRequest {
   password: string;
 }
 
-export interface ApiAddTrainingRequest {
-  date: Date;
-  exercises: {
-    exerciseId: string;
-    sets: {
-      repetitions: number;
-      weight: number;
-    }[];
-  }[];
+export interface ApiAddTrainingRequest extends ITrainingAdd {
+  createdAt: Date;
 }

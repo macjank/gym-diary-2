@@ -1,19 +1,21 @@
-export interface TrainingSet {
+export interface ITrainingSet {
   id: string;
   repetitions: number;
   weight: number;
 }
 
-export interface TrainingExercise {
+export interface ITrainingExercise {
   id: string;
-  muscleId: string;
-  baseExerciseId: string;
-  sets: TrainingSet[];
+  exerciseId: string;
+  sets: ITrainingSet[];
 }
 
-export interface Training {
+export interface ITrainingAdd {
+  date: Date;
+  exercises: ITrainingExercise[];
+}
+
+export interface ITraining extends ITrainingAdd {
   id: string;
-  date: string;
-  gym: string;
-  exercises: TrainingExercise[];
+  createdAt: Date;
 }
