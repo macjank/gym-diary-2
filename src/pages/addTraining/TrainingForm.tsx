@@ -7,16 +7,10 @@ import BottomActionBox from '../../components/bottomActionBox/BottomActionBox';
 import CustomDatePicker from '../../components/inputs/CustomDatePicker';
 import FormErrorMessage from '../../components/messages/FormErrorMessage';
 import { trainingFormSchema } from '../../static/validationSchemas/trainingFormSchema';
-import { TrainingSet } from '../../types/trainingTypes';
+import { ITrainingAdd } from '../../types/trainingTypes';
 import ExerciseForm from './components/ExerciseForm';
 
-export interface TrainingFormData {
-  date: Date;
-  exercises: {
-    exerciseId: string;
-    sets: TrainingSet[];
-  }[];
-}
+export type TrainingFormData = ITrainingAdd;
 
 interface TrainingFormProps {
   onSubmitForm: (data: TrainingFormData) => void;
@@ -32,6 +26,7 @@ const TrainingForm = ({ onSubmitForm, isLoading }: TrainingFormProps) => {
       date: new Date(),
       exercises: [
         {
+          id: uuidv4(),
           exerciseId: '',
           sets: [
             {
@@ -60,6 +55,7 @@ const TrainingForm = ({ onSubmitForm, isLoading }: TrainingFormProps) => {
 
   const addExercise = () => {
     append({
+      id: uuidv4(),
       exerciseId: '',
       sets: [],
     });

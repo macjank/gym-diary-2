@@ -28,6 +28,7 @@ export const trainingSet = yup.object().shape({
 });
 
 export const trainingExercise = yup.object().shape({
+  id: requiredString,
   exerciseId: requiredString,
   sets: yup.array().of(trainingSet).required('required').min(1, 'setsRequired'),
 });

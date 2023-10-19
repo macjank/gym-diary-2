@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ApiExerciseCategory } from '../../types/apiTypes';
+import { ApiBaseExerciseCategory } from '../../types/apiTypes';
 
 interface exercisesCategoriesCollectionSliceInterface {
-  exercisesCategories: ApiExerciseCategory[];
+  exercisesCategories: ApiBaseExerciseCategory[];
 }
 
 const initialState: exercisesCategoriesCollectionSliceInterface = {
@@ -13,7 +13,7 @@ const exercisesCategoriesCollectionSlice = createSlice({
   name: 'exercisesCategoriesCollection',
   initialState,
   reducers: {
-    setExercisesCategories(state, action: PayloadAction<{ exercisesCategories: ApiExerciseCategory[] }>) {
+    setExercisesCategories(state, action: PayloadAction<{ exercisesCategories: ApiBaseExerciseCategory[] }>) {
       state.exercisesCategories = action.payload.exercisesCategories;
     },
   },

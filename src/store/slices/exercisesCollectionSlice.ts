@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ApiExercise } from '../../types/apiTypes';
+import { ApiBaseExercise } from '../../types/apiTypes';
 
 interface exercisesCollectionSliceInterface {
-  exercises: ApiExercise[];
+  exercises: ApiBaseExercise[];
 }
 
 const initialState: exercisesCollectionSliceInterface = {
@@ -13,7 +13,7 @@ const exercisesCollectionSlice = createSlice({
   name: 'exercisesCollection',
   initialState,
   reducers: {
-    setExercises(state, action: PayloadAction<{ exercises: ApiExercise[] }>) {
+    setExercises(state, action: PayloadAction<{ exercises: ApiBaseExercise[] }>) {
       state.exercises = action.payload.exercises;
     },
   },
