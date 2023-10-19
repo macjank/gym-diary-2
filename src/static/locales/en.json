@@ -23,6 +23,9 @@
     "haveAccount": "Masz już konto?",
     "loginLinkBtn": "Zaloguj się"
   },
+  "home": {
+    "title": "Ostatnie treningi"
+  },
   "addTraining": {
     "title": "Nowy trening"
   },

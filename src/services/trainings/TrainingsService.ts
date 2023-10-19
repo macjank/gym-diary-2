@@ -39,6 +39,31 @@ class TrainingsService {
       ...training,
     });
   }
+
+  static async getTrainings({ queryLimit }: { queryLimit?: number } = {}) {
+    let myQuery: Query<DocumentData> = collection(db, FirebaseCollectionsEnum.Trainings);
+
+    if (queryLimit) {
+      myQuery = query(myQuery, limit(queryLimit));
+    }
+
+    const querySnapshot = await getDocs(myQuery);
+
+    const trainings: ITraining[] = [];
+
+    querySnapshot.forEach(doc => {
+      const data = doc.data();
+
+      trainings.push({
+        ...data,
+        date: data.date.toDate(),
+        createdAt: data.createdAt.toDate(),
+        id: doc.id,
+      } as ITraining);
+    });
+
+    return trainings;
+  }
 }
 
 export default TrainingsService;
