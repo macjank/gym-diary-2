@@ -1,7 +1,10 @@
-import { CircularProgress, Stack, Typography } from '@mui/material';
+import { CircularProgress, Divider, List, ListItem, Stack, Typography } from '@mui/material';
+import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import ContentWrapper from '../../components/wrappers/ContentWrapper';
 import useTrainings from '../../hooks/api/useTrainings';
+import { routes } from '../../routes/routes';
 
 const AllTrainings = () => {
   const { t } = useTranslation();
@@ -17,11 +20,22 @@ const AllTrainings = () => {
             <CircularProgress />
           </Stack>
         ) : (
-          <Stack>
-            {trainings?.map(training => (
-              <Typography key={training.id}>{training.date.toLocaleDateString()}</Typography>
+          <List>
+            {trainings?.map((training, index) => (
+              <Fragment key={training.id}>
+                <Link to={routes.trainingDetails(training.id)}>
+                  <ListItem
+                    sx={{
+                      padding: '1.5rem 0',
+                    }}
+                  >
+                    <Typography>{training.date.toLocaleDateString()}</Typography>
+                  </ListItem>
+                </Link>
+                {index !== trainings.length - 1 && <Divider />}
+              </Fragment>
             ))}
-          </Stack>
+          </List>
         )}
       </Stack>
     </ContentWrapper>
