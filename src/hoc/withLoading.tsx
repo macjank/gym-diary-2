@@ -1,5 +1,6 @@
 import { CircularProgress, Stack, Typography } from '@mui/material';
 import { ComponentType, FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface WithLoadingProps {
   isLoading: boolean;
@@ -11,10 +12,12 @@ const withLoading = <P extends object>(WrappedComponent: ComponentType<P>) => {
   const WithLoading: FC<P & WithLoadingProps> = (props: WithLoadingProps) => {
     const { isLoading, isError, errorMessage, ...rest } = props;
 
+    const { t } = useTranslation();
+
     if (isLoading) {
       return (
         <Stack justifyContent="center" alignItems="center">
-          <CircularProgress />;
+          <CircularProgress />
         </Stack>
       );
     }
@@ -22,7 +25,7 @@ const withLoading = <P extends object>(WrappedComponent: ComponentType<P>) => {
     if (isError) {
       return (
         <Stack justifyContent="center" alignItems="center">
-          <Typography color="error">{errorMessage || 'An error occurred. Please try again later.'}</Typography>;
+          <Typography color="error">{errorMessage || t('errorMessages.generalError')}</Typography>
         </Stack>
       );
     }
