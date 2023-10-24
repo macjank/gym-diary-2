@@ -70,12 +70,20 @@ class TrainingsService {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      const training = docSnap.data() as ITraining;
-      return training;
+      const trainingResponse = docSnap.data();
+
+      const training = {
+        ...trainingResponse,
+        id: docSnap.id,
+        date: trainingResponse.date.toDate(),
+        createdAt: trainingResponse.createdAt.toDate(),
+      };
+
+      return training as ITraining;
     } else {
       console.log('No such document!');
       //TODO: some message??
-      throw new Error();
+      throw new Error('noSuchDocument');
     }
   }
 }
