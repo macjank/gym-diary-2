@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '..';
 
-const useExercisesCollection = () => {
+const useExercisesCategoriesCollection = () => {
   const exercisesCollection = useSelector(
     (state: RootState) => state.exercisesCategoriesCollection.exercisesCategories,
   );
@@ -9,4 +9,4 @@ const useExercisesCollection = () => {
   return { exercisesCollection };
 };
 
-export default useExercisesCollection;
+export default useExercisesCategoriesCollection;

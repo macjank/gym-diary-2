@@ -2,9 +2,11 @@ import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import MainLayout from '../components/layouts/MainLayout';
 import AddTraining from '../pages/addTraining/AddTraining';
+import AllTrainings from '../pages/allTrainings/AllTrainings';
 import Home from '../pages/home/HomePage';
 import Login from '../pages/login/LoginPage';
 import Register from '../pages/register/RegisterPage';
+import TrainingDetailsPage from '../pages/trainingDetails/TrainingDetailsPage';
 import ProtectedRoute from './ProtectedRoute';
 import { paths, routes } from './routes';
 
@@ -21,6 +23,13 @@ const AppRoutes = () => {
       <Route element={<ProtectedRoute />}>
         <Route path={paths.addTraining} element={withLayout(<AddTraining />)} />
       </Route>
+      <Route element={<ProtectedRoute />}>
+        <Route path={paths.allTrainings} element={withLayout(<AllTrainings />)} />
+      </Route>
+      <Route element={<ProtectedRoute />}>
+        <Route path={paths.trainingDetails} element={withLayout(<TrainingDetailsPage />)} />
+      </Route>
+
       <Route element={<ProtectedRoute />}>
         <Route path={'*'} element={withLayout(<Navigate to={routes.home} />)} />
       </Route>

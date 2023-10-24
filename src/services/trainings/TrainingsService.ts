@@ -1,4 +1,4 @@
-import { DocumentData, Query, addDoc, collection, getDocs, limit, query } from 'firebase/firestore';
+import { DocumentData, Query, addDoc, collection, doc, getDoc, getDocs, limit, query } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import store from '../../store';
 import { setExercisesCategories } from '../../store/slices/exercisesCategoriesCollectionSlice';
@@ -63,6 +63,28 @@ class TrainingsService {
     });
 
     return trainings;
+  }
+
+  static async getSingleTraining(id: string) {
+    const docRef = doc(db, FirebaseCollectionsEnum.Trainings, id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const trainingResponse = docSnap.data();
+
+      const training = {
+        ...trainingResponse,
+        id: docSnap.id,
+        date: trainingResponse.date.toDate(),
+        createdAt: trainingResponse.createdAt.toDate(),
+      };
+
+      return training as ITraining;
+    } else {
+      console.log('No such document!');
+      //TODO: some message??
+      throw new Error('noSuchDocument');
+    }
   }
 }
 
