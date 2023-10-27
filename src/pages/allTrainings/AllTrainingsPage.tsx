@@ -1,3 +1,4 @@
+import { ChevronRight } from '@mui/icons-material';
 import { CircularProgress, Divider, List, ListItem, Stack, Typography } from '@mui/material';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -6,7 +7,7 @@ import ContentWrapper from '../../components/wrappers/ContentWrapper';
 import useTrainings from '../../hooks/api/useTrainings';
 import { routes } from '../../routes/routes';
 
-const AllTrainings = () => {
+const AllTrainingsPage = () => {
   const { t } = useTranslation();
   const { trainings, isLoading } = useTrainings();
 
@@ -27,9 +28,13 @@ const AllTrainings = () => {
                   <ListItem
                     sx={{
                       padding: '1.5rem 0',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
                     }}
                   >
                     <Typography>{training.date.toLocaleDateString()}</Typography>
+                    <ChevronRight />
                   </ListItem>
                 </Link>
                 {index !== trainings.length - 1 && <Divider />}
@@ -42,4 +47,4 @@ const AllTrainings = () => {
   );
 };
 
-export default AllTrainings;
+export default AllTrainingsPage;
