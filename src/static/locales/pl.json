@@ -2,6 +2,7 @@
   "test": "test",
   "navigation": {
     "addTraining": "Nowy trening",
+    "allTrainings": "Moje treningi",
     "exercisesBase": "Baza ćwiczeń",
     "logout": "Wyloguj się"
   },
@@ -24,10 +25,20 @@
     "loginLinkBtn": "Zaloguj się"
   },
   "home": {
-    "title": "Ostatnie treningi"
+    "title": "Ostatnie treningi",
+    "seeAllTrainingsBtn": "Zobacz wszystkie"
   },
   "addTraining": {
     "title": "Nowy trening"
+  },
+  "allTrainings": {
+    "title": "Moje treningi"
+  },
+  "trainingDetails": {
+    "title": "Szczegóły treningu",
+    "set": "Seria",
+    "repetitions": "Powtórzenia",
+    "weight": "Masa [kg]"
   },
   "trainingForm": {
     "dateLabel": "Data",
@@ -42,10 +53,13 @@
   },
   "errorMessages": {
     "api": {
+      "generalError": "Coś poszło nie tak. Prosimy spróbować ponownie później",
       "loginGeneral": "Nie udało się zalogować",
+      "getSingleTrainingGeneral": "Nie udało się pobrać szczegółów treningu",
       "addTrainingGeneral": "Nie udało się zapisać treningu",
       "auth/too-many-requests": "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.",
-      "auth/invalid-login-credentials": "Invalid login credentials"
+      "auth/invalid-login-credentials": "Invalid login credentials",
+      "noSuchDocument": "Nie znaleziono dokumentu"
     },
     "form": {
       "required": "Pole wymagane",
