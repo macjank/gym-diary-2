@@ -1,25 +1,25 @@
-import { CircularProgress, Stack } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import ContentWrapper from '../../components/wrappers/ContentWrapper';
+import withLoading from '../../hoc/withLoading';
 import useSingleTraining from '../../hooks/api/useSingleTraining';
-import TrainingDetailsView from './components/TrainingDetailsView';
+import { ITraining } from '../../types/trainingTypes';
+import TrainingDetailsView from './components/trainingDetailsView/TrainingDetailsView';
+
+const TrainingDetailsViewWithLoading = withLoading(TrainingDetailsView);
 
 const TrainingDetailsPage = () => {
   const params = useParams();
   const trainingId = params.id;
 
-  const { training } = useSingleTraining({ trainingId });
+  const { training, isLoading, isError } = useSingleTraining({ trainingId });
 
   return (
     <ContentWrapper>
-      {/* // TODO: add async data wrapper - handle loading and error */}
-      {!training ? (
-        <Stack alignItems="center">
-          <CircularProgress />
-        </Stack>
-      ) : (
-        <TrainingDetailsView training={training} />
-      )}
+      <TrainingDetailsViewWithLoading
+        training={training as ITraining}
+        isLoading={isLoading || !training}
+        isError={isError}
+      />
     </ContentWrapper>
   );
 };
