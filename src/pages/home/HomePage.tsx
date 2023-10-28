@@ -13,11 +13,13 @@ const HomePage = () => {
       <Stack>
         <HomeLastTrainings />
 
-        <RouterLink to={routes.allTrainings}>
-          <MUILink component="button" variant="body2">
-            {t('home.seeAllTrainingsBtn')}
-          </MUILink>
-        </RouterLink>
+        <Stack justifyContent="center" alignItems="center">
+          <RouterLink to={routes.allTrainings}>
+            <MUILink component="button" variant="body2">
+              {t('home.seeAllTrainingsBtn')}
+            </MUILink>
+          </RouterLink>
+        </Stack>
       </Stack>
     </ContentWrapper>
   );
