@@ -6,7 +6,7 @@ import useAddTraining from '../../hooks/api/useAddTraining';
 import { routes } from '../../routes/routes';
 import TrainingForm, { TrainingFormData } from './TrainingForm';
 
-const AddTraining = () => {
+const AddTrainingPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -33,4 +33,4 @@ const AddTraining = () => {
   );
 };
 
-export default AddTraining;
+export default AddTrainingPage;

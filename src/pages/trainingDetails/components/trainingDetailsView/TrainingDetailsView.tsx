@@ -1,5 +1,7 @@
 import { Delete, Edit } from '@mui/icons-material';
 import { Box, IconButton, Stack, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { routes } from '../../../../routes/routes';
 import { ITraining } from '../../../../types/trainingTypes';
 import TrainingDetailsExercises from './components/TrainingDetailsExercises';
 
@@ -14,10 +16,11 @@ const TrainingDetailsView = ({ training }: TrainingDetailsViewProps) => {
         <Typography variant="h5">{training?.date.toLocaleDateString()}</Typography>
 
         <Stack direction="row" gap={2}>
-          {/* //TODO: navigate to edit page */}
-          <IconButton sx={{ boxShadow: 2 }}>
-            <Edit />
-          </IconButton>
+          <Link to={routes.editTraining(training.id)}>
+            <IconButton sx={{ boxShadow: 2 }}>
+              <Edit />
+            </IconButton>
+          </Link>
           {/* //TODO: delete training */}
           <IconButton sx={{ boxShadow: 2 }}>
             <Delete />
