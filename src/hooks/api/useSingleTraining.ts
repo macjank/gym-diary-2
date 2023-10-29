@@ -13,7 +13,7 @@ const useSingleTraining = ({ trainingId }: useSingleTrainingProps) => {
   const { showErrorToast } = useToast();
   const { t } = useTranslation();
 
-  const [training, setTraining] = useState<ITraining | null>(null);
+  const [training, setTraining] = useState<ITraining>();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 

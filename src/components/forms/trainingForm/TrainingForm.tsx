@@ -3,41 +3,28 @@ import { Button, Stack } from '@mui/material';
 import { Controller, FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuidv4 } from 'uuid';
-import BottomActionBox from '../../components/bottomActionBox/BottomActionBox';
-import CustomDatePicker from '../../components/inputs/CustomDatePicker';
-import FormErrorMessage from '../../components/messages/FormErrorMessage';
-import { trainingFormSchema } from '../../static/validationSchemas/trainingFormSchema';
-import { ITrainingAdd } from '../../types/trainingTypes';
+import { trainingFormSchema } from '../../../static/validationSchemas/trainingFormSchema';
+import { ITraining, ITrainingAdd } from '../../../types/trainingTypes';
+import BottomActionBox from '../../bottomActionBox/BottomActionBox';
+import CustomDatePicker from '../../inputs/CustomDatePicker';
+import FormErrorMessage from '../../messages/FormErrorMessage';
 import ExerciseForm from './components/ExerciseForm';
+import { getTrainingFormDefaults } from './utils/getTrainingFormDefaults';
 
 export type TrainingFormData = ITrainingAdd;
 
 interface TrainingFormProps {
   onSubmitForm: (data: TrainingFormData) => void;
   isLoading: boolean;
+  initialTraining?: ITraining;
 }
 
-const TrainingForm = ({ onSubmitForm, isLoading }: TrainingFormProps) => {
+const TrainingForm = ({ onSubmitForm, isLoading, initialTraining }: TrainingFormProps) => {
   const { t } = useTranslation();
 
   const methods = useForm<TrainingFormData>({
     resolver: yupResolver(trainingFormSchema),
-    defaultValues: {
-      date: new Date(),
-      exercises: [
-        {
-          id: uuidv4(),
-          exerciseId: '',
-          sets: [
-            {
-              id: uuidv4(),
-              repetitions: 0,
-              weight: 0,
-            },
-          ],
-        },
-      ],
-    },
+    defaultValues: getTrainingFormDefaults({ initialTraining }),
   });
 
   const {

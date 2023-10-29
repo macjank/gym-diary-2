@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
+import TrainingForm from '../../components/forms/trainingForm/TrainingForm';
 import ContentWrapper from '../../components/wrappers/ContentWrapper';
 import withLoading from '../../hoc/withLoading';
 import useSingleTraining from '../../hooks/api/useSingleTraining';
-import TrainingForm from '../addTraining/TrainingForm';
 
 const TrainingFormWithLoading = withLoading(TrainingForm);
 
@@ -18,7 +18,12 @@ const EditTrainingPage = () => {
 
   return (
     <ContentWrapper>
-      <TrainingFormWithLoading isError={isError} isLoading={isLoading} onSubmitForm={handleEditTraining} />
+      <TrainingFormWithLoading
+        isError={isError}
+        isLoading={isLoading}
+        onSubmitForm={handleEditTraining}
+        initialTraining={training}
+      />
     </ContentWrapper>
   );
 };
