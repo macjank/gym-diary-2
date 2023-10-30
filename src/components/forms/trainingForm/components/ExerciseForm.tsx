@@ -101,10 +101,10 @@ const ExerciseForm = ({ index, onRemove }: ExerciseFormProps) => {
       <ConfirmModal
         isOpen={isDeleteModalOpen}
         setIsOpen={setIsDeleteModalOpen}
-        title="Czy na pewno chcesz usunąć to ćwiczenie?"
+        title={t('trainingForm.deleteExercise.title')}
         onConfirm={onRemove}
-        closeBtnText="Anuluj"
-        confirmBtnText="Usuń"
+        closeBtnText={t('trainingForm.deleteExercise.cancelBtn')}
+        confirmBtnText={t('trainingForm.deleteExercise.confirmBtn')}
       />
     </>
   );
