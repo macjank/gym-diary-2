@@ -3,10 +3,10 @@ import { Box, Grid, IconButton, Typography } from '@mui/material';
 import { useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import Input from '../../../components/inputs/TextInput';
-import FormErrorMessage from '../../../components/messages/FormErrorMessage';
-import ConfirmModal from '../../../components/modals/confirmModal/ConfirmModal';
-import { CallbackDefault } from '../../../types/commonTypes';
+import { CallbackDefault } from '../../../../types/commonTypes';
+import Input from '../../../inputs/TextInput';
+import FormErrorMessage from '../../../messages/FormErrorMessage';
+import ConfirmModal from '../../../modals/confirmModal/ConfirmModal';
 import { TrainingFormData } from '../TrainingForm';
 
 interface SetFormProps {

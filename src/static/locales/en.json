@@ -31,6 +31,9 @@
   "addTraining": {
     "title": "Nowy trening"
   },
+  "editTraining": {
+    "title": "Edytuj trening"
+  },
   "allTrainings": {
     "title": "Moje treningi"
   },
@@ -38,7 +41,12 @@
     "title": "Szczegóły treningu",
     "set": "Seria",
     "repetitions": "Powtórzenia",
-    "weight": "Masa [kg]"
+    "weight": "Masa [kg]",
+    "delete": {
+      "title": "Czy na pewno chcesz usunąć trening?",
+      "cancelBtn": "Anuluj",
+      "confirmBtn": "Usuń"
+    }
   },
   "trainingForm": {
     "dateLabel": "Data",
@@ -49,7 +57,12 @@
     "exerciseTitle": "Ćwiczenie",
     "setTitle": "Seria",
     "setWeightLabel": "Masa (kg)",
-    "setRepsLabel": "Powtórzenia"
+    "setRepsLabel": "Powtórzenia",
+    "deleteExercise": {
+      "title": "Czy na pewno chcesz usunąć ćwiczenie?",
+      "cancelBtn": "Anuluj",
+      "confirmBtn": "Usuń"
+    }
   },
   "errorMessages": {
     "api": {
@@ -57,6 +70,8 @@
       "loginGeneral": "Nie udało się zalogować",
       "getSingleTrainingGeneral": "Nie udało się pobrać szczegółów treningu",
       "addTrainingGeneral": "Nie udało się zapisać treningu",
+      "editTrainingGeneral": "Nie udało się edytować treningu",
+      "deleteTrainingGeneral": "Nie udało się usunąć treningu",
       "auth/too-many-requests": "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.",
       "auth/invalid-login-credentials": "Invalid login credentials",
       "noSuchDocument": "Nie znaleziono dokumentu"
@@ -74,6 +89,8 @@
   },
   "successMessages": {
     "register": "Konto zostało utworzone",
-    "newTrainingAdded": "Trening został dodany"
+    "newTrainingAdded": "Trening został dodany",
+    "trainingEdited": "Zmiany zostały zapisane",
+    "trainingDeleted": "Trening został usunięty"
   }
 }

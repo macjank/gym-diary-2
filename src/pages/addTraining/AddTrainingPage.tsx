@@ -1,12 +1,12 @@
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import TrainingForm, { TrainingFormData } from '../../components/forms/trainingForm/TrainingForm';
 import ContentWrapper from '../../components/wrappers/ContentWrapper';
 import useAddTraining from '../../hooks/api/useAddTraining';
 import { routes } from '../../routes/routes';
-import TrainingForm, { TrainingFormData } from './TrainingForm';
 
-const AddTraining = () => {
+const AddTrainingPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -33,4 +33,4 @@ const AddTraining = () => {
   );
 };
 
-export default AddTraining;
+export default AddTrainingPage;

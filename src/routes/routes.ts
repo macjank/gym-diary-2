@@ -5,6 +5,7 @@ export const routes = {
   addTraining: '/add-training',
   allTrainings: '/trainings',
   trainingDetails: (id: string) => `/trainings/${id}`,
+  editTraining: (id: string) => `/trainings/${id}/edit`,
   // exercisesBase: '/exercises-base',
 };
 
@@ -15,5 +16,6 @@ export const paths = {
   addTraining: '/add-training',
   allTrainings: '/trainings',
   trainingDetails: '/trainings/:id',
+  editTraining: '/trainings/:id/edit',
   // exercisesBase: '/exercises-base',
 };

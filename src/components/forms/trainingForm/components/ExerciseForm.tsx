@@ -5,12 +5,12 @@ import { useState } from 'react';
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuidv4 } from 'uuid';
-import Input from '../../../components/inputs/TextInput';
-import FormErrorMessage from '../../../components/messages/FormErrorMessage';
-import ConfirmModal from '../../../components/modals/confirmModal/ConfirmModal';
-import useExercisesCollection from '../../../store/hooks/useExercisesCollection';
-import { CallbackDefault } from '../../../types/commonTypes';
-import { Lang } from '../../../types/globalTypes';
+import useExercisesCollection from '../../../../store/hooks/useExercisesCollection';
+import { CallbackDefault } from '../../../../types/commonTypes';
+import { Lang } from '../../../../types/globalTypes';
+import Input from '../../../inputs/TextInput';
+import FormErrorMessage from '../../../messages/FormErrorMessage';
+import ConfirmModal from '../../../modals/confirmModal/ConfirmModal';
 import { TrainingFormData } from '../TrainingForm';
 import SetForm from './SetForm';
 
@@ -101,10 +101,10 @@ const ExerciseForm = ({ index, onRemove }: ExerciseFormProps) => {
       <ConfirmModal
         isOpen={isDeleteModalOpen}
         setIsOpen={setIsDeleteModalOpen}
-        title="Czy na pewno chcesz usunąć to ćwiczenie?"
+        title={t('trainingForm.deleteExercise.title')}
         onConfirm={onRemove}
-        closeBtnText="Anuluj"
-        confirmBtnText="Usuń"
+        closeBtnText={t('trainingForm.deleteExercise.cancelBtn')}
+        confirmBtnText={t('trainingForm.deleteExercise.confirmBtn')}
       />
     </>
   );

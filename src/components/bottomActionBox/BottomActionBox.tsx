@@ -18,6 +18,7 @@ const BottomActionBox = ({ children }: BottomActionBoxProps) => {
         padding: '1rem',
         borderTop: `2px solid ${colors.borderPrimary}`,
         backgroundColor: colors.white1000,
+        zIndex: 10,
       }}
     >
       {children}
