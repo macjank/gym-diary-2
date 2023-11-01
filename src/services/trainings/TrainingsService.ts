@@ -1,11 +1,23 @@
-import { DocumentData, Query, addDoc, collection, doc, getDoc, getDocs, limit, query } from 'firebase/firestore';
+import {
+  DocumentData,
+  Query,
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  limit,
+  query,
+  updateDoc,
+} from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import store from '../../store';
 import { setExercisesCategories } from '../../store/slices/exercisesCategoriesCollectionSlice';
 import { setExercises } from '../../store/slices/exercisesCollectionSlice';
 import { ApiAddTrainingRequest, ApiBaseExercise, ApiBaseExerciseCategory } from '../../types/apiTypes';
 import { FirebaseCollectionsEnum } from '../../types/firebaseCollectionsEnum';
-import { ITraining } from '../../types/trainingTypes';
+import { ITraining, ITrainingAdd } from '../../types/trainingTypes';
 
 class TrainingsService {
   static async getExercisesCategories() {
@@ -85,6 +97,14 @@ class TrainingsService {
       //TODO: some message??
       throw new Error('noSuchDocument');
     }
+  }
+
+  static async editTraining({ id, trainingData }: { id: string; trainingData: ITrainingAdd }) {
+    const docRef = doc(db, FirebaseCollectionsEnum.Trainings, id);
+
+    await updateDoc(docRef, {
+      ...trainingData,
+    });
   }
 }
 
