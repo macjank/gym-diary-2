@@ -106,6 +106,10 @@ class TrainingsService {
       ...trainingData,
     });
   }
+
+  static async deleteTraining(id: string) {
+    await deleteDoc(doc(db, FirebaseCollectionsEnum.Trainings, id));
+  }
 }
 
 export default TrainingsService;
