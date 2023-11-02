@@ -83,7 +83,14 @@ const LoginForm = ({ onPasswordLogin, onGoogleLogin, isLoading }: LoginFormProps
           {t('login.submitBtn')}
         </Button>
 
-        <Button onClick={onGoogleLogin} variant="outlined" color="primary" fullWidth startIcon={<Google />}>
+        <Button
+          onClick={onGoogleLogin}
+          variant="outlined"
+          color="primary"
+          size="large"
+          fullWidth
+          startIcon={<Google />}
+        >
           {t('login.googleLogin')}
         </Button>
       </Stack>

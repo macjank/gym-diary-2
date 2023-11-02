@@ -1,4 +1,5 @@
-import { Link as MUILink, Stack } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import { Box, Fab, Link as MUILink, Stack } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink } from 'react-router-dom';
 import ContentWrapper from '../../components/wrappers/ContentWrapper';
@@ -20,6 +21,14 @@ const HomePage = () => {
             </MUILink>
           </RouterLink>
         </Stack>
+
+        <Box sx={{ position: 'fixed', bottom: '1rem', right: '1rem' }}>
+          <RouterLink to={routes.addTraining}>
+            <Fab color="primary" aria-label="add">
+              <AddIcon />
+            </Fab>
+          </RouterLink>
+        </Box>
       </Stack>
     </ContentWrapper>
   );

@@ -79,10 +79,11 @@ const TrainingForm = ({ onSubmitForm, isLoading, initialTraining }: TrainingForm
 
       <BottomActionBox>
         <Stack gap={1}>
-          <Button type="button" variant="outlined" color="primary" onClick={addExercise}>
+          <Button size="large" type="button" variant="outlined" color="primary" onClick={addExercise}>
             {t('trainingForm.addExerciseBtn')}
           </Button>
           <Button
+            size="large"
             type="submit"
             variant="contained"
             color="primary"
