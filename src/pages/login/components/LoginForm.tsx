@@ -30,61 +30,64 @@ const LoginForm = ({ onPasswordLogin, onGoogleLogin, isLoading }: LoginFormProps
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ width: '100%' }}>
-      <Stack spacing={2} sx={{ p: 2, maxWidth: '600px', mx: 'auto' }}>
-        <Box>
-          <Controller
-            name="email"
-            control={control}
-            render={({ field }) => (
-              <Input
-                inputProps={{
-                  id: 'login-email',
-                  type: 'email',
-                  error: !!errors.email,
-                  label: t('login.emailLabel'),
-                }}
-                formFieldProps={{
-                  ...field,
-                }}
-              />
-            )}
-          />
-          <FormErrorMessage errors={errors} name="email" />
-        </Box>
+    <Stack
+      component="form"
+      onSubmit={handleSubmit(onSubmit)}
+      spacing={2}
+      sx={{ py: 2, width: '100%', maxWidth: '600px', mx: 'auto' }}
+    >
+      <Box>
+        <Controller
+          name="email"
+          control={control}
+          render={({ field }) => (
+            <Input
+              inputProps={{
+                id: 'login-email',
+                type: 'email',
+                error: !!errors.email,
+                label: t('login.emailLabel'),
+              }}
+              formFieldProps={{
+                ...field,
+              }}
+            />
+          )}
+        />
+        <FormErrorMessage errors={errors} name="email" />
+      </Box>
 
-        <Box>
-          <Controller
-            name="password"
-            control={control}
-            render={({ field }) => (
-              <Input
-                inputProps={{
-                  id: 'login-password',
-                  type: 'password',
-                  error: !!errors.password,
-                  label: t('login.passwordLabel'),
-                }}
-                formFieldProps={{
-                  ...field,
-                }}
-              />
-            )}
-          />
-          <FormErrorMessage errors={errors} name="password" />
-        </Box>
+      <Box>
+        <Controller
+          name="password"
+          control={control}
+          render={({ field }) => (
+            <Input
+              inputProps={{
+                id: 'login-password',
+                type: 'password',
+                error: !!errors.password,
+                label: t('login.passwordLabel'),
+              }}
+              formFieldProps={{
+                ...field,
+              }}
+            />
+          )}
+        />
+        <FormErrorMessage errors={errors} name="password" />
+      </Box>
 
-        <Stack gap={1}>
-          <Button type="submit" variant="contained" color="primary" size="large" fullWidth disabled={isLoading}>
-            {t('login.submitBtn')}
-          </Button>
+      <Stack gap={1}>
+        <Button type="submit" variant="contained" color="primary" size="large" fullWidth disabled={isLoading}>
+          {t('login.submitBtn')}
+        </Button>
 
-          <Button onClick={onGoogleLogin} variant="outlined" color="primary" fullWidth startIcon={<Google />}>
-            {t('login.googleLogin')}
-          </Button>
-        </Stack>
+        <Button onClick={onGoogleLogin} variant="outlined" color="primary" fullWidth startIcon={<Google />}>
+          {t('login.googleLogin')}
+        </Button>
       </Stack>
-    </Box>
+    </Stack>
   );
 };
 
