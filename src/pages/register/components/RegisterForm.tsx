@@ -93,9 +93,7 @@ const RegisterForm = ({ onSubmitForm, isLoading }: RegisterFormProps) => {
             />
           )}
         />
-        {/* {!!errors.confirmPassword && (
-            <FormErrorMessage>{t(`errorMessages.form.${errors.confirmPassword.message}`)}</FormErrorMessage>
-          )} */}
+
         <FormErrorMessage errors={errors} name="confirmPassword" />
       </Box>
 
