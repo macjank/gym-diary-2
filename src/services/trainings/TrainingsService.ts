@@ -1,3 +1,4 @@
+import { getAuth } from 'firebase/auth';
 import {
   DocumentData,
   Query,
@@ -10,6 +11,7 @@ import {
   limit,
   query,
   updateDoc,
+  where,
 } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import store from '../../store';
@@ -20,6 +22,17 @@ import { FirebaseCollectionsEnum } from '../../types/firebaseCollectionsEnum';
 import { ITraining, ITrainingAdd } from '../../types/trainingTypes';
 
 class TrainingsService {
+  static async getUserId() {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (!user) {
+      throw new Error('permission-denied');
+    }
+
+    return user.uid;
+  }
+
   static async getExercisesCategories() {
     const querySnapshot = await getDocs(collection(db, FirebaseCollectionsEnum.ExercisesCategories));
 
@@ -47,13 +60,21 @@ class TrainingsService {
   }
 
   static async addTraining(training: ApiAddTrainingRequest) {
+    const userId = await this.getUserId();
+
     await addDoc(collection(db, FirebaseCollectionsEnum.Trainings), {
+      uid: userId,
       ...training,
     });
   }
 
   static async getTrainings({ queryLimit }: { queryLimit?: number } = {}) {
-    let myQuery: Query<DocumentData> = collection(db, FirebaseCollectionsEnum.Trainings);
+    const userId = await this.getUserId();
+
+    let myQuery: Query<DocumentData> = query(
+      collection(db, FirebaseCollectionsEnum.Trainings),
+      where('uid', '==', userId),
+    );
 
     if (queryLimit) {
       myQuery = query(myQuery, limit(queryLimit));
@@ -93,8 +114,6 @@ class TrainingsService {
 
       return training as ITraining;
     } else {
-      console.log('No such document!');
-      //TODO: some message??
       throw new Error('noSuchDocument');
     }
   }

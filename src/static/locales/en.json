@@ -68,13 +68,14 @@
     "api": {
       "generalError": "Coś poszło nie tak. Prosimy spróbować ponownie później",
       "loginGeneral": "Nie udało się zalogować",
-      "getSingleTrainingGeneral": "Nie udało się pobrać szczegółów treningu",
       "addTrainingGeneral": "Nie udało się zapisać treningu",
       "editTrainingGeneral": "Nie udało się edytować treningu",
       "deleteTrainingGeneral": "Nie udało się usunąć treningu",
+      "getDataGeneral": "Nie udało się pobrać danych",
       "auth/too-many-requests": "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.",
       "auth/invalid-login-credentials": "Invalid login credentials",
-      "noSuchDocument": "Nie znaleziono dokumentu"
+      "noSuchDocument": "Nie znaleziono dokumentu",
+      "permission-denied": "Brak dostępu. Zaloguj się, aby kontynuować."
     },
     "form": {
       "required": "Pole wymagane",

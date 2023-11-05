@@ -1,12 +1,18 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import TrainingsService from '../../services/trainings/TrainingsService';
 import { ITraining } from '../../types/trainingTypes';
+import { getApiErrorMessage } from '../../utils/handleApiError/handleApiError';
+import useToast from '../useToast';
 
 interface useTrainingsProps {
   limit?: number;
 }
 
 const useTrainings = ({ limit }: useTrainingsProps = {}) => {
+  const { t } = useTranslation();
+  const { showErrorToast } = useToast();
+
   const [trainings, setTrainings] = useState<ITraining[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -18,8 +24,8 @@ const useTrainings = ({ limit }: useTrainingsProps = {}) => {
 
       setTrainings(trainings);
     } catch (error) {
-      //TODO:
-      console.log(error);
+      const errorMsg = getApiErrorMessage(error);
+      showErrorToast(t(!!errorMsg ? `errorMessages.api.${errorMsg}` : 'errorMessages.api.getDataGeneral'));
     } finally {
       setIsLoading(false);
     }
