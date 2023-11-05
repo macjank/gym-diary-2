@@ -14,18 +14,18 @@ const withLoading = <P extends object>(WrappedComponent: ComponentType<P>) => {
 
     const { t } = useTranslation();
 
-    if (isLoading) {
+    if (isError) {
       return (
         <Stack justifyContent="center" alignItems="center">
-          <CircularProgress />
+          <Typography color="error">{errorMessage || t('errorMessages.api.generalError')}</Typography>
         </Stack>
       );
     }
 
-    if (isError) {
+    if (isLoading) {
       return (
         <Stack justifyContent="center" alignItems="center">
-          <Typography color="error">{errorMessage || t('errorMessages.generalError')}</Typography>
+          <CircularProgress />
         </Stack>
       );
     }

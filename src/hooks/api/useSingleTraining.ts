@@ -27,7 +27,7 @@ const useSingleTraining = ({ trainingId }: useSingleTrainingProps) => {
     } catch (error) {
       const errorMsg = getApiErrorMessage(error);
       setIsError(true);
-      showErrorToast(t(!!errorMsg ? `errorMessages.api.${errorMsg}` : 'errorMessages.api.getSingleTrainingGeneral'));
+      showErrorToast(t(!!errorMsg ? `errorMessages.api.${errorMsg}` : 'errorMessages.api.getDataGeneral'));
     } finally {
       setIsLoading(false);
     }
