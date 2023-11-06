@@ -64,6 +64,10 @@
       "confirmBtn": "Usuń"
     }
   },
+  "trainingsList": {
+    "emptyList": "Brak danych",
+    "addFirst": "Dodaj pierwszy trening"
+  },
   "errorMessages": {
     "api": {
       "generalError": "Coś poszło nie tak. Prosimy spróbować ponownie później",

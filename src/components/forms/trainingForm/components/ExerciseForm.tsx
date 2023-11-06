@@ -41,7 +41,7 @@ const ExerciseForm = ({ index, onRemove }: ExerciseFormProps) => {
   });
 
   const addSet = () => {
-    append({ id: uuidv4(), repetitions: 0, weight: 0 });
+    append({ id: uuidv4(), repetitions: undefined as never, weight: undefined as never });
   };
 
   return (

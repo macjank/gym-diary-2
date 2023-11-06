@@ -14,9 +14,6 @@ import {
   where,
 } from 'firebase/firestore';
 import { db } from '../../firebase/config';
-import store from '../../store';
-import { setExercisesCategories } from '../../store/slices/exercisesCategoriesCollectionSlice';
-import { setExercises } from '../../store/slices/exercisesCollectionSlice';
 import { ApiAddTrainingRequest, ApiBaseExercise, ApiBaseExerciseCategory } from '../../types/apiTypes';
 import { FirebaseCollectionsEnum } from '../../types/firebaseCollectionsEnum';
 import { ITraining, ITrainingAdd } from '../../types/trainingTypes';
@@ -43,7 +40,7 @@ class TrainingsService {
       categories.push(data as ApiBaseExerciseCategory);
     });
 
-    store.dispatch(setExercisesCategories({ exercisesCategories: categories }));
+    return categories;
   }
 
   static async getExercises() {
@@ -56,7 +53,7 @@ class TrainingsService {
       exercises.push(data as ApiBaseExercise);
     });
 
-    store.dispatch(setExercises({ exercises }));
+    return exercises;
   }
 
   static async addTraining(training: ApiAddTrainingRequest) {
