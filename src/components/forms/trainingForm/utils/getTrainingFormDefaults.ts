@@ -1,9 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 import { ITraining } from '../../../../types/trainingTypes';
-import { TrainingFormData } from '../TrainingForm';
 
 export const getTrainingFormDefaults = ({ initialTraining }: { initialTraining: ITraining | undefined }) => {
-  const initValues: TrainingFormData = {
+  const initValues = {
     date: initialTraining?.date ?? new Date(),
     exercises: initialTraining?.exercises ?? [
       {
@@ -12,8 +11,8 @@ export const getTrainingFormDefaults = ({ initialTraining }: { initialTraining: 
         sets: [
           {
             id: uuidv4(),
-            repetitions: 0,
-            weight: 0,
+            repetitions: undefined,
+            weight: undefined,
           },
         ],
       },
