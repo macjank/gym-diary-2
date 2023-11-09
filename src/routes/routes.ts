@@ -6,7 +6,6 @@ export const routes = {
   allTrainings: '/trainings',
   trainingDetails: (id: string) => `/trainings/${id}`,
   editTraining: (id: string) => `/trainings/${id}/edit`,
-  // exercisesBase: '/exercises-base',
 };
 
 export const paths = {
@@ -17,5 +16,4 @@ export const paths = {
   allTrainings: '/trainings',
   trainingDetails: '/trainings/:id',
   editTraining: '/trainings/:id/edit',
-  // exercisesBase: '/exercises-base',
 };
