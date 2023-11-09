@@ -1,36 +1,20 @@
 import { Link, Stack, Typography } from '@mui/material';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import ContentWrapper from '../../components/wrappers/ContentWrapper';
-import useToast from '../../hooks/useToast';
+import useRegister from '../../hooks/api/auth/useRegister';
 import { routes } from '../../routes/routes';
-import AuthService from '../../services/auth/AuthService';
 import { ApiPasswordRegisterRequest } from '../../types/apiTypes';
-import { getApiErrorMessage } from '../../utils/handleApiError/handleApiError';
 import RegisterForm from './components/RegisterForm';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-  const { showErrorToast, showSuccessToast } = useToast();
   const { t } = useTranslation();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const { registerWithEmailAndPassword, isLoading } = useRegister();
 
   const handleSubmitRegisterForm = async ({ email, password }: ApiPasswordRegisterRequest) => {
-    try {
-      setIsLoading(true);
-      await AuthService.registerWithEmailAndPassword({ email, password });
-      navigate(routes.login);
-
-      showSuccessToast(t('successMessages.register'));
-    } catch (error) {
-      const errorMsg = getApiErrorMessage(error);
-
-      showErrorToast(t(!!errorMsg ? `errorMessages.api.${errorMsg}` : 'errorMessages.api.registerGeneral'));
-    } finally {
-      setIsLoading(false);
-    }
+    await registerWithEmailAndPassword({ email, password });
   };
 
   return (
