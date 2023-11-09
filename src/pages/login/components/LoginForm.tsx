@@ -5,9 +5,9 @@ import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import Input from '../../../components/inputs/TextInput';
 import FormErrorMessage from '../../../components/messages/FormErrorMessage';
-import { loginFormSchema } from '../../../static/validationSchemas/loginFormSchema';
 import { ApiPasswordLoginRequest } from '../../../types/apiTypes';
 import { CallbackDefault } from '../../../types/commonTypes';
+import { loginFormSchema } from '../../../utils/validationSchemas/loginFormSchema';
 
 interface LoginFormProps {
   onPasswordLogin: ({ email, password }: ApiPasswordLoginRequest) => Promise<void>;

@@ -4,8 +4,8 @@ import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import Input from '../../../components/inputs/TextInput';
 import FormErrorMessage from '../../../components/messages/FormErrorMessage';
-import { registerFormSchema } from '../../../static/validationSchemas/registerFormSchema';
 import { ApiPasswordRegisterRequest } from '../../../types/apiTypes';
+import { registerFormSchema } from '../../../utils/validationSchemas/registerFormSchema';
 
 interface RegisterFormProps {
   onSubmitForm: ({ email, password }: ApiPasswordRegisterRequest) => Promise<void>;
