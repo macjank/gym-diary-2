@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import AddTrainingFAB from '../../components/buttons/addTrainingFAB/AddTrainingFAB';
 import TrainingsList from '../../components/lists/trainingsList/TrainingsList';
 import ContentWrapper from '../../components/wrappers/ContentWrapper';
-import withLoading from '../../hoc/withLoading';
-import useTrainings from '../../hooks/api/useTrainings';
+import withLoading from '../../hoc/withLoading/withLoading';
+import useTrainings from '../../hooks/api/auth/useTrainings';
 
 const TrainingsListWithLoading = withLoading(TrainingsList);
 
@@ -17,7 +17,6 @@ const AllTrainingsPage = () => {
       <ContentWrapper>
         <Stack>
           <Typography variant="h5">{t('allTrainings.title')}</Typography>
-
           <TrainingsListWithLoading isLoading={isLoading} isError={isError} trainings={trainings} />
         </Stack>
       </ContentWrapper>

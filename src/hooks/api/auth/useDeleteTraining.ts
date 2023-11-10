@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import TrainingsService from '../../services/trainings/TrainingsService';
-import { getApiErrorMessage } from '../../utils/handleApiError/handleApiError';
-import useToast from '../useToast';
+import TrainingsService from '../../../services/trainings/TrainingsService';
+import { getApiErrorMessage } from '../../../utils/handleApiError/handleApiError';
+import useToast from '../../useToast';
 
 const useDeleteTraining = () => {
   const { t } = useTranslation();

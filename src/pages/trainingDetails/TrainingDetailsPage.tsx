@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import ContentWrapper from '../../components/wrappers/ContentWrapper';
-import withLoading from '../../hoc/withLoading';
-import useSingleTraining from '../../hooks/api/useSingleTraining';
+import withLoading from '../../hoc/withLoading/withLoading';
+import useSingleTraining from '../../hooks/api/auth/useSingleTraining';
 import { ITraining } from '../../types/trainingTypes';
 import TrainingDetailsView from './components/trainingDetailsView/TrainingDetailsView';
 

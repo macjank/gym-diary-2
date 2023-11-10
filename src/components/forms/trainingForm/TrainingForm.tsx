@@ -3,10 +3,10 @@ import { Button, Stack } from '@mui/material';
 import { Controller, FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuidv4 } from 'uuid';
-import { trainingFormSchema } from '../../../static/validationSchemas/trainingFormSchema';
 import { ITraining, ITrainingAdd } from '../../../types/trainingTypes';
+import { trainingFormSchema } from '../../../utils/validationSchemas/trainingFormSchema';
 import BottomActionBox from '../../bottomActionBox/BottomActionBox';
-import CustomDatePicker from '../../inputs/CustomDatePicker';
+import DatePicker from '../../inputs/DatePicker';
 import FormErrorMessage from '../../messages/FormErrorMessage';
 import ExerciseForm from './components/ExerciseForm';
 import { getTrainingFormDefaults } from './utils/getTrainingFormDefaults';
@@ -57,7 +57,7 @@ const TrainingForm = ({ onSubmitForm, isLoading, initialTraining }: TrainingForm
               name="date"
               control={control}
               render={({ field }) => (
-                <CustomDatePicker
+                <DatePicker
                   label={t('trainingForm.dateLabel')}
                   value={field.value}
                   setValue={val => field.onChange(val)}

@@ -12,19 +12,9 @@ import {
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import useExercisesCollection from '../../../../../store/hooks/useExercisesCollection';
-import { ApiBaseExercise } from '../../../../../types/apiTypes';
 import { Lang } from '../../../../../types/globalTypes';
 import { ITrainingExercise } from '../../../../../types/trainingTypes';
-
-const findExerciseName = ({
-  exerciseId,
-  exercisesCollection,
-}: {
-  exerciseId: string;
-  exercisesCollection: ApiBaseExercise[];
-}) => {
-  return exercisesCollection.find(exercise => exercise.id === exerciseId)?.name;
-};
+import { findExerciseName } from '../utils/findExerciseName';
 
 interface TrainingDetailsExercisesProps {
   exercises: ITrainingExercise[];

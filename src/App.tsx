@@ -1,4 +1,3 @@
-import { ThemeProvider } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useEffect } from 'react';
@@ -12,7 +11,6 @@ import store from './store';
 import { setExercisesCategories } from './store/slices/exercisesCategoriesCollectionSlice';
 import { setExercises } from './store/slices/exercisesCollectionSlice';
 import './styles/global.css';
-import { theme } from './styles/theme';
 
 function App() {
   const getExercisesInitData = async () => {
@@ -31,11 +29,9 @@ function App() {
     <>
       <Provider store={store}>
         <BrowserRouter>
-          <ThemeProvider theme={theme}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <AppRoutes />
-            </LocalizationProvider>
-          </ThemeProvider>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <AppRoutes />
+          </LocalizationProvider>
         </BrowserRouter>
       </Provider>
       <ToastContainer

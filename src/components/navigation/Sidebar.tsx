@@ -2,18 +2,21 @@ import { CloseOutlined } from '@mui/icons-material';
 import { Box, IconButton, MenuItem, MenuList } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
+import useLogout from '../../hooks/api/auth/useLogout';
 import { routes } from '../../routes/routes';
-import AuthService from '../../services/auth/AuthService';
+import { CallbackDefault } from '../../types/commonTypes';
 
 interface SidebarProps {
-  closeSidebar: () => void;
+  closeSidebar: CallbackDefault;
 }
 
 const Sidebar = ({ closeSidebar }: SidebarProps) => {
   const { t } = useTranslation();
 
+  const { logout } = useLogout();
+
   const handleLogout = () => {
-    AuthService.logout();
+    logout();
   };
 
   return (

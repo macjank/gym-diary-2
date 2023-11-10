@@ -13,7 +13,7 @@ import {
   updateDoc,
   where,
 } from 'firebase/firestore';
-import { db } from '../../firebase/config';
+import { db } from '../../static/firebase/config';
 import { ApiAddTrainingRequest, ApiBaseExercise, ApiBaseExerciseCategory } from '../../types/apiTypes';
 import { FirebaseCollectionsEnum } from '../../types/firebaseCollectionsEnum';
 import { ITraining, ITrainingAdd } from '../../types/trainingTypes';

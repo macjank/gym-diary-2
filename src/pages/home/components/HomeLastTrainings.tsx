@@ -2,8 +2,8 @@ import { Link as MUILink, Stack, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink } from 'react-router-dom';
 import TrainingsList from '../../../components/lists/trainingsList/TrainingsList';
-import withLoading from '../../../hoc/withLoading';
-import useTrainings from '../../../hooks/api/useTrainings';
+import withLoading from '../../../hoc/withLoading/withLoading';
+import useTrainings from '../../../hooks/api/auth/useTrainings';
 import { routes } from '../../../routes/routes';
 
 const numOfTrainings = 3;

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import TrainingsService from '../../services/trainings/TrainingsService';
-import { ITrainingAdd } from '../../types/trainingTypes';
-import { getApiErrorMessage } from '../../utils/handleApiError/handleApiError';
-import useToast from '../useToast';
+import TrainingsService from '../../../services/trainings/TrainingsService';
+import { ITrainingAdd } from '../../../types/trainingTypes';
+import { getApiErrorMessage } from '../../../utils/handleApiError/handleApiError';
+import useToast from '../../useToast';
 
 const useEditTraining = () => {
   const { t } = useTranslation();
