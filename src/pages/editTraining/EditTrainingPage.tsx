@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 import TrainingForm, { TrainingFormData } from '../../components/forms/trainingForm/TrainingForm';
 import ContentWrapper from '../../components/wrappers/ContentWrapper';
-import withLoading from '../../hoc/withLoading';
-import useEditTraining from '../../hooks/api/useEditTraining';
-import useSingleTraining from '../../hooks/api/useSingleTraining';
+import withLoading from '../../hoc/withLoading/withLoading';
+import useEditTraining from '../../hooks/api/auth/useEditTraining';
+import useSingleTraining from '../../hooks/api/auth/useSingleTraining';
 import { routes } from '../../routes/routes';
 
 const TrainingFormWithLoading = withLoading(TrainingForm);
@@ -13,7 +13,6 @@ const TrainingFormWithLoading = withLoading(TrainingForm);
 const EditTrainingPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-
   const params = useParams();
   const trainingId = params.id as string;
 

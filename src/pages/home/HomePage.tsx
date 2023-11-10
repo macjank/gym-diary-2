@@ -8,7 +8,6 @@ const HomePage = () => {
     <ContentWrapper>
       <Stack>
         <HomeLastTrainings />
-
         <AddTrainingFAB />
       </Stack>
     </ContentWrapper>

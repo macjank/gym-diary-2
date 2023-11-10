@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
-import { googleProvider } from '../../firebase/config';
+import { googleProvider } from '../../static/firebase/config';
 import { ApiPasswordLoginRequest, ApiPasswordRegisterRequest } from '../../types/apiTypes';
 
 const auth = getAuth();

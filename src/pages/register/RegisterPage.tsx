@@ -29,13 +29,7 @@ const RegisterPage = () => {
           <Typography variant="body1" sx={{ marginBottom: '1.5rem' }} gutterBottom textAlign="center">
             {t('register.haveAccount')}
           </Typography>
-          <Link
-            component="button"
-            variant="body2"
-            onClick={() => {
-              navigate(routes.login);
-            }}
-          >
+          <Link component="button" variant="body2" onClick={() => navigate(routes.login)}>
             {t('register.loginLinkBtn')}
           </Link>
         </Stack>

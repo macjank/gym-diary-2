@@ -3,7 +3,7 @@ import { Google } from '@mui/icons-material';
 import { Box, Button, Stack } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import Input from '../../../components/inputs/TextInput';
+import Input from '../../../components/inputs/Input';
 import FormErrorMessage from '../../../components/messages/FormErrorMessage';
 import { ApiPasswordLoginRequest } from '../../../types/apiTypes';
 import { CallbackDefault } from '../../../types/commonTypes';

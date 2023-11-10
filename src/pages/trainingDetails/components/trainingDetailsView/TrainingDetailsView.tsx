@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import ConfirmModal from '../../../../components/modals/confirmModal/ConfirmModal';
-import useDeleteTraining from '../../../../hooks/api/useDeleteTraining';
+import useDeleteTraining from '../../../../hooks/api/auth/useDeleteTraining';
 import { routes } from '../../../../routes/routes';
 import { ITraining } from '../../../../types/trainingTypes';
 import TrainingDetailsExercises from './components/TrainingDetailsExercises';
