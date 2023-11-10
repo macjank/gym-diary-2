@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { CallbackDefault } from '../../../../types/commonTypes';
-import Input from '../../../inputs/TextInput';
+import Input from '../../../inputs/Input';
 import FormErrorMessage from '../../../messages/FormErrorMessage';
 import ConfirmModal from '../../../modals/confirmModal/ConfirmModal';
 import { TrainingFormData } from '../TrainingForm';

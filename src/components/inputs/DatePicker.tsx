@@ -1,15 +1,15 @@
-import { DatePicker } from '@mui/x-date-pickers';
+import { DatePicker as MUIDatepicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 
-interface CustomDatePickerProps {
+interface DatePickerProps {
   label: string;
   value: Date | null;
   setValue: (newDate: Date | null | undefined) => void;
 }
 
-const CustomDatePicker = ({ label, value, setValue }: CustomDatePickerProps) => {
+const DatePicker = ({ label, value, setValue }: DatePickerProps) => {
   return (
-    <DatePicker
+    <MUIDatepicker
       label={label}
       value={!!value ? dayjs(value) : null}
       onChange={val => setValue(val?.toDate())}
@@ -19,4 +19,4 @@ const CustomDatePicker = ({ label, value, setValue }: CustomDatePickerProps) => 
   );
 };
 
-export default CustomDatePicker;
+export default DatePicker;

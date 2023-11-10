@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import useExercisesCollection from '../../../../store/hooks/useExercisesCollection';
 import { CallbackDefault } from '../../../../types/commonTypes';
 import { Lang } from '../../../../types/globalTypes';
-import Input from '../../../inputs/TextInput';
+import Input from '../../../inputs/Input';
 import FormErrorMessage from '../../../messages/FormErrorMessage';
 import ConfirmModal from '../../../modals/confirmModal/ConfirmModal';
 import { TrainingFormData } from '../TrainingForm';
