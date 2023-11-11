@@ -1,13 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Google } from '@mui/icons-material';
 import { Box, Button, Stack } from '@mui/material';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import Input from '../../../components/inputs/Input';
-import FormErrorMessage from '../../../components/messages/FormErrorMessage';
-import { ApiPasswordLoginRequest } from '../../../types/apiTypes';
-import { CallbackDefault } from '../../../types/commonTypes';
-import { loginFormSchema } from '../../../utils/validationSchemas/loginFormSchema';
+import Input from '../../../../components/inputs/Input';
+import FormErrorMessage from '../../../../components/messages/FormErrorMessage';
+import { ApiPasswordLoginRequest } from '../../../../types/apiTypes';
+import { CallbackDefault } from '../../../../types/commonTypes';
+import { loginFormSchema } from '../../../../utils/validationSchemas/loginFormSchema';
 
 interface LoginFormProps {
   onPasswordLogin: ({ email, password }: ApiPasswordLoginRequest) => Promise<void>;
@@ -21,11 +21,11 @@ const LoginForm = ({ onPasswordLogin, onGoogleLogin, isLoading }: LoginFormProps
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({
+  } = useForm<ApiPasswordLoginRequest>({
     resolver: yupResolver(loginFormSchema),
   });
 
-  const onSubmit = async ({ email, password }: ApiPasswordLoginRequest) => {
+  const onSubmit: SubmitHandler<ApiPasswordLoginRequest> = async ({ email, password }: ApiPasswordLoginRequest) => {
     await onPasswordLogin({ email, password });
   };
 
