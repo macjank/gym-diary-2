@@ -8,7 +8,7 @@ import { trainingFormSchema } from '../../../utils/validationSchemas/trainingFor
 import BottomActionBox from '../../bottomActionBox/BottomActionBox';
 import DatePicker from '../../inputs/DatePicker';
 import FormErrorMessage from '../../messages/FormErrorMessage';
-import ExerciseForm from './components/ExerciseForm';
+import TrainingExerciseForm from './components/TrainingExerciseForm';
 import { getTrainingFormDefaults } from './utils/getTrainingFormDefaults';
 
 export type TrainingFormData = ITrainingAdd;
@@ -71,7 +71,7 @@ const TrainingForm = ({ onSubmitForm, isLoading, initialTraining }: TrainingForm
 
           <Stack>
             {fields.map((exercise, index) => (
-              <ExerciseForm key={exercise.id} index={index} onRemove={() => remove(index)} />
+              <TrainingExerciseForm key={exercise.id} index={index} onRemove={() => remove(index)} />
             ))}
           </Stack>
         </Stack>

@@ -12,14 +12,14 @@ import Input from '../../../inputs/Input';
 import FormErrorMessage from '../../../messages/FormErrorMessage';
 import ConfirmModal from '../../../modals/confirmModal/ConfirmModal';
 import { TrainingFormData } from '../TrainingForm';
-import SetForm from './SetForm';
+import TrainingSetForm from './TrainingSetForm';
 
-interface ExerciseFormProps {
+interface TrainingExerciseFormProps {
   index: number;
   onRemove: CallbackDefault;
 }
 
-const ExerciseForm = ({ index, onRemove }: ExerciseFormProps) => {
+const TrainingExerciseForm = ({ index, onRemove }: TrainingExerciseFormProps) => {
   const { t } = useTranslation();
   const currentLang = i18next.resolvedLanguage ?? Lang.PL;
 
@@ -90,7 +90,7 @@ const ExerciseForm = ({ index, onRemove }: ExerciseFormProps) => {
         <FormErrorMessage errors={errors} name={`exercises.${index}.sets`} />
 
         {sets.map((set, setIndex) => (
-          <SetForm key={set.id} exerciseIndex={index} setIndex={setIndex} onRemove={() => remove(setIndex)} />
+          <TrainingSetForm key={set.id} exerciseIndex={index} setIndex={setIndex} onRemove={() => remove(setIndex)} />
         ))}
 
         <Button fullWidth sx={{ marginTop: '1rem' }} onClick={addSet}>
@@ -110,4 +110,4 @@ const ExerciseForm = ({ index, onRemove }: ExerciseFormProps) => {
   );
 };
 
-export default ExerciseForm;
+export default TrainingExerciseForm;
