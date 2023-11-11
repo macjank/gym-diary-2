@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ExerciseFormData } from '../../../components/forms/exerciseForm/ExerciseForm';
-import TrainingsService from '../../../services/trainings/TrainingsService';
+import ExercisesService from '../../../services/exercises/ExercisesService';
 import store from '../../../store';
 import { setExercises } from '../../../store/slices/exercisesCollectionSlice';
 import { getApiErrorMessage } from '../../../utils/handleApiError/handleApiError';
@@ -19,11 +19,11 @@ const useAddExercise = () => {
     setIsError(false);
 
     try {
-      await TrainingsService.addExercise(data);
+      await ExercisesService.addExercise(data);
 
       showSuccessToast(t('successMessages.newExerciseAdded'));
 
-      const exercises = await TrainingsService.getExercises();
+      const exercises = await ExercisesService.getExercises();
       store.dispatch(setExercises({ exercises }));
     } catch (error) {
       const errorMsg = getApiErrorMessage(error);
