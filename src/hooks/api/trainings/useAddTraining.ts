@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { TrainingFormData } from '../../../components/forms/trainingForm/TrainingForm';
 import TrainingsService from '../../../services/trainings/TrainingsService';
-import { ApiAddTrainingRequest } from '../../../types/apiTypes';
 import { getApiErrorMessage } from '../../../utils/handleApiError/handleApiError';
 import useToast from '../../useToast';
 
@@ -12,7 +12,7 @@ const useAddTraining = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const addTraining = async (data: ApiAddTrainingRequest) => {
+  const addTraining = async (data: TrainingFormData) => {
     setIsLoading(true);
     setIsError(false);
 
