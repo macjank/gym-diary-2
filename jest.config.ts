@@ -3,7 +3,8 @@ import { Config } from '@jest/types';
 const jestConfig = async (): Promise<Config.InitialOptions> => {
   return {
     verbose: true,
-    testRegex: ['.*\\.spec\\.ts$', '.*\\.spec\\.ts$'],
+    testEnvironment: 'jest-environment-jsdom',
+    testRegex: ['.*\\.spec\\.ts$', '.*\\.spec\\.tsx$'],
     preset: 'ts-jest',
     globals: {
       'ts-jest': {

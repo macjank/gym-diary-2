@@ -1,4 +1,4 @@
-required('@testing-library/jest-dom/extend-expect');
+require('@testing-library/jest-dom');
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({ t: key => key }),
