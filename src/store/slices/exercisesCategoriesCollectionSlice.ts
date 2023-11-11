@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ApiBaseExerciseCategory } from '../../types/apiTypes';
+import { ApiBaseExerciseCategory } from '../../types/exerciseTypes';
 import { StoreNamesEnum } from '../../types/storeNamesEnum';
 
 interface exercisesCategoriesCollectionSliceInterface {

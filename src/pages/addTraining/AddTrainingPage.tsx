@@ -13,12 +13,7 @@ const AddTrainingPage = () => {
   const { addTraining, isLoading } = useAddTraining();
 
   const handleAddTraining = async (data: TrainingFormData) => {
-    const requestData = {
-      ...data,
-      createdAt: new Date(),
-    };
-
-    await addTraining(requestData);
+    await addTraining(data);
     navigate(routes.home);
   };
 

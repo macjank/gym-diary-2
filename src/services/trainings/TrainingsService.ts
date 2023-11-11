@@ -13,10 +13,12 @@ import {
   updateDoc,
   where,
 } from 'firebase/firestore';
+import { ExerciseFormData } from '../../components/forms/exerciseForm/ExerciseForm';
+import { TrainingFormData } from '../../components/forms/trainingForm/TrainingForm';
 import { db } from '../../static/firebase/config';
-import { ApiAddTrainingRequest, ApiBaseExercise, ApiBaseExerciseCategory } from '../../types/apiTypes';
+import { ApiBaseExerciseCategory, IExercise } from '../../types/exerciseTypes';
 import { FirebaseCollectionsEnum } from '../../types/firebaseCollectionsEnum';
-import { ITraining, ITrainingAdd } from '../../types/trainingTypes';
+import { ITraining } from '../../types/trainingTypes';
 
 class TrainingsService {
   static async getUserId() {
@@ -44,24 +46,42 @@ class TrainingsService {
   }
 
   static async getExercises() {
-    const querySnapshot = await getDocs(collection(db, FirebaseCollectionsEnum.Exercises));
+    const userId = await this.getUserId();
 
-    const exercises: ApiBaseExercise[] = [];
+    const myQuery: Query<DocumentData> = query(
+      collection(db, FirebaseCollectionsEnum.Exercises),
+      where('uid', '==', userId),
+    );
+
+    const querySnapshot = await getDocs(myQuery);
+
+    const exercises: IExercise[] = [];
 
     querySnapshot.forEach(doc => {
       const data = doc.data();
-      exercises.push(data as ApiBaseExercise);
+      exercises.push({ ...data, id: doc.id, createdAt: data.createdAt.toDate() } as IExercise);
     });
 
     return exercises;
   }
 
-  static async addTraining(training: ApiAddTrainingRequest) {
+  static async addExercise(exercise: ExerciseFormData) {
+    const userId = await this.getUserId();
+
+    await addDoc(collection(db, FirebaseCollectionsEnum.Exercises), {
+      ...exercise,
+      uid: userId,
+      createdAt: new Date(),
+    });
+  }
+
+  static async addTraining(training: TrainingFormData) {
     const userId = await this.getUserId();
 
     await addDoc(collection(db, FirebaseCollectionsEnum.Trainings), {
-      uid: userId,
       ...training,
+      uid: userId,
+      createdAt: new Date(),
     });
   }
 
@@ -115,7 +135,7 @@ class TrainingsService {
     }
   }
 
-  static async editTraining({ id, trainingData }: { id: string; trainingData: ITrainingAdd }) {
+  static async editTraining({ id, trainingData }: { id: string; trainingData: TrainingFormData }) {
     const docRef = doc(db, FirebaseCollectionsEnum.Trainings, id);
 
     await updateDoc(docRef, {

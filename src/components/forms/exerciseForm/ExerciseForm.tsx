@@ -1,15 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Button, Stack } from '@mui/material';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { MultilangString } from '../../../types/globalTypes';
 import { addExerciseFormSchema } from '../../../utils/validationSchemas/addExerciseFormSchema';
 import BottomActionBox from '../../bottomActionBox/BottomActionBox';
 import Input from '../../inputs/Input';
 import FormErrorMessage from '../../messages/FormErrorMessage';
 
 export interface ExerciseFormData {
-  namePl: string;
-  nameEn: string;
+  name: MultilangString[];
 }
 
 interface ExerciseFormProps {
@@ -26,6 +26,23 @@ const ExerciseForm = ({ onSubmitForm, isLoading }: ExerciseFormProps) => {
     formState: { errors },
   } = useForm<ExerciseFormData>({
     resolver: yupResolver(addExerciseFormSchema),
+    defaultValues: {
+      name: [
+        {
+          lang: 'pl',
+          value: '',
+        },
+        {
+          lang: 'en',
+          value: '',
+        },
+      ],
+    },
+  });
+
+  const { fields: nameFields } = useFieldArray({
+    name: 'name',
+    control,
   });
 
   const onSubmit = (data: ExerciseFormData) => onSubmitForm(data);
@@ -34,47 +51,28 @@ const ExerciseForm = ({ onSubmitForm, isLoading }: ExerciseFormProps) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack pb="8rem" mt="1rem">
         <Stack gap={2}>
-          <Box>
-            <Controller
-              name="namePl"
-              control={control}
-              render={({ field }) => (
-                <Input
-                  inputProps={{
-                    id: 'exercise-name-pl',
-                    type: 'text',
-                    error: !!errors.namePl,
-                    label: t('exerciseForm.namePl'),
-                  }}
-                  formFieldProps={{
-                    ...field,
-                  }}
-                />
-              )}
-            />
-            <FormErrorMessage errors={errors} name="namePl" />
-          </Box>
-
-          <Box>
-            <Controller
-              name="nameEn"
-              control={control}
-              render={({ field }) => (
-                <Input
-                  inputProps={{
-                    id: 'exercise-name-pl',
-                    type: 'text',
-                    error: !!errors.nameEn,
-                    label: t('exerciseForm.nameEn'),
-                  }}
-                  formFieldProps={{
-                    ...field,
-                  }}
-                />
-              )}
-            />
-            <FormErrorMessage errors={errors} name="nameEn" />
-          </Box>
+          {nameFields.map((nameField, index) => (
+            <Box key={nameField.lang}>
+              <Controller
+                name={`name.${index}.value`}
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    inputProps={{
+                      id: `exercise-name-${nameField.lang}`,
+                      type: 'text',
+                      error: !!errors.name?.[index],
+                      label: t(`exerciseForm.name.${nameField.lang}`),
+                    }}
+                    formFieldProps={{
+                      ...field,
+                    }}
+                  />
+                )}
+              />
+              <FormErrorMessage errors={errors} name={`name.${index}.value`} />
+            </Box>
+          ))}
         </Stack>
 
         <FormErrorMessage errors={errors} name="exercises" />

@@ -3,7 +3,7 @@
   "navigation": {
     "addTraining": "Nowy trening",
     "allTrainings": "Moje treningi",
-    "exercisesBase": "Baza ćwiczeń",
+    "allExercises": "Moje ćwiczenia",
     "logout": "Wyloguj się"
   },
   "login": {
@@ -68,6 +68,20 @@
     "emptyList": "Brak danych",
     "addFirst": "Dodaj pierwszy trening"
   },
+  "allExercises": {
+    "title": "Moje ćwiczenia"
+  },
+  "addExercise": {
+    "title": "Nowe ćwiczenie",
+    "subtitle": "Nazwij nowe ćwiczenie we wszystkich wskazanych językach"
+  },
+  "exerciseForm": {
+    "name": {
+      "pl": "Nazwa - język polski",
+      "en": "Nazwa - język angielski"
+    },
+    "submitBtn": "Zapisz ćwiczenie"
+  },
   "errorMessages": {
     "api": {
       "generalError": "Coś poszło nie tak. Prosimy spróbować ponownie później",
@@ -75,6 +89,7 @@
       "addTrainingGeneral": "Nie udało się zapisać treningu",
       "editTrainingGeneral": "Nie udało się edytować treningu",
       "deleteTrainingGeneral": "Nie udało się usunąć treningu",
+      "addExerciseGeneral": "Nie udało się zapisać ćwiczenia",
       "getDataGeneral": "Nie udało się pobrać danych",
       "auth/too-many-requests": "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.",
       "auth/invalid-login-credentials": "Invalid login credentials",
@@ -98,6 +113,7 @@
     "register": "Konto zostało utworzone",
     "newTrainingAdded": "Trening został dodany",
     "trainingEdited": "Zmiany zostały zapisane",
-    "trainingDeleted": "Trening został usunięty"
+    "trainingDeleted": "Trening został usunięty",
+    "newExerciseAdded": "Ćwiczenie zostało dodane"
   }
 }
