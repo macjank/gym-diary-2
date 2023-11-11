@@ -1,13 +1,12 @@
 import CloseIcon from '@mui/icons-material/Close';
 import { Box, Button, Grid, IconButton, MenuItem, Typography } from '@mui/material';
-import i18next from 'i18next';
 import { useState } from 'react';
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuidv4 } from 'uuid';
+import useFindTranslation from '../../../../hooks/useFindTranslation';
 import useExercisesCollection from '../../../../store/hooks/useExercisesCollection';
 import { CallbackDefault } from '../../../../types/commonTypes';
-import { Lang } from '../../../../types/globalTypes';
 import Input from '../../../inputs/Input';
 import FormErrorMessage from '../../../messages/FormErrorMessage';
 import ConfirmModal from '../../../modals/confirmModal/ConfirmModal';
@@ -21,7 +20,7 @@ interface TrainingExerciseFormProps {
 
 const TrainingExerciseForm = ({ index, onRemove }: TrainingExerciseFormProps) => {
   const { t } = useTranslation();
-  const currentLang = i18next.resolvedLanguage ?? Lang.PL;
+  const { findTranslation } = useFindTranslation();
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -78,7 +77,7 @@ const TrainingExerciseForm = ({ index, onRemove }: TrainingExerciseFormProps) =>
             >
               {exercises.map(ex => (
                 <MenuItem key={ex.id} value={ex.id}>
-                  {ex.name[currentLang]}
+                  {findTranslation(ex.name)}
                 </MenuItem>
               ))}
             </Input>

@@ -11,8 +11,8 @@ import {
   Typography,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import useFindTranslation from '../../../../../hooks/useFindTranslation';
 import useExercisesCollection from '../../../../../store/hooks/useExercisesCollection';
-import { Lang } from '../../../../../types/globalTypes';
 import { ITrainingExercise } from '../../../../../types/trainingTypes';
 import { findExerciseName } from '../utils/findExerciseName';
 
@@ -21,8 +21,8 @@ interface TrainingDetailsExercisesProps {
 }
 
 const TrainingDetailsExercises = ({ exercises }: TrainingDetailsExercisesProps) => {
-  const { t, i18n } = useTranslation();
-  const currentLang = i18n.resolvedLanguage ?? Lang.PL;
+  const { t } = useTranslation();
+  const { findTranslation } = useFindTranslation();
 
   const { exercises: exercisesCollection } = useExercisesCollection();
 
@@ -30,7 +30,7 @@ const TrainingDetailsExercises = ({ exercises }: TrainingDetailsExercisesProps) 
     <Stack>
       {exercises.map((exercise, index) => {
         const exerciseNames = findExerciseName({ exerciseId: exercise.exerciseId, exercisesCollection });
-        const translatedName = exerciseNames?.[currentLang];
+        const translatedName = findTranslation(exerciseNames ?? []);
 
         return (
           <Box key={exercise.id} mt={3}>
