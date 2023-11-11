@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import TrainingForm, { TrainingFormData } from '../../components/forms/trainingForm/TrainingForm';
 import ContentWrapper from '../../components/wrappers/ContentWrapper';
-import useAddTraining from '../../hooks/api/auth/useAddTraining';
+import useAddTraining from '../../hooks/api/trainings/useAddTraining';
 import { routes } from '../../routes/routes';
 
 const AddTrainingPage = () => {
@@ -13,12 +13,7 @@ const AddTrainingPage = () => {
   const { addTraining, isLoading } = useAddTraining();
 
   const handleAddTraining = async (data: TrainingFormData) => {
-    const requestData = {
-      ...data,
-      createdAt: new Date(),
-    };
-
-    await addTraining(requestData);
+    await addTraining(data);
     navigate(routes.home);
   };
 

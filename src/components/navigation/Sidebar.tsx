@@ -44,6 +44,12 @@ const Sidebar = ({ closeSidebar }: SidebarProps) => {
           </MenuItem>
         </NavLink>
 
+        <NavLink to={routes.allExercises} onClick={closeSidebar}>
+          <MenuItem divider sx={{ padding: '1rem 3rem' }}>
+            {t('navigation.allExercises')}
+          </MenuItem>
+        </NavLink>
+
         <NavLink
           to={routes.login}
           onClick={() => {

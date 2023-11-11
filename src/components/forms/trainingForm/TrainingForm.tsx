@@ -3,15 +3,18 @@ import { Button, Stack } from '@mui/material';
 import { Controller, FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuidv4 } from 'uuid';
-import { ITraining, ITrainingAdd } from '../../../types/trainingTypes';
+import { ITraining, ITrainingExercise } from '../../../types/trainingTypes';
 import { trainingFormSchema } from '../../../utils/validationSchemas/trainingFormSchema';
 import BottomActionBox from '../../bottomActionBox/BottomActionBox';
 import DatePicker from '../../inputs/DatePicker';
 import FormErrorMessage from '../../messages/FormErrorMessage';
-import ExerciseForm from './components/ExerciseForm';
+import TrainingExerciseForm from './components/TrainingExerciseForm';
 import { getTrainingFormDefaults } from './utils/getTrainingFormDefaults';
 
-export type TrainingFormData = ITrainingAdd;
+export interface TrainingFormData {
+  date: Date;
+  exercises: ITrainingExercise[];
+}
 
 interface TrainingFormProps {
   onSubmitForm: (data: TrainingFormData) => void;
@@ -71,7 +74,7 @@ const TrainingForm = ({ onSubmitForm, isLoading, initialTraining }: TrainingForm
 
           <Stack>
             {fields.map((exercise, index) => (
-              <ExerciseForm key={exercise.id} index={index} onRemove={() => remove(index)} />
+              <TrainingExerciseForm key={exercise.id} index={index} onRemove={() => remove(index)} />
             ))}
           </Stack>
         </Stack>

@@ -1,27 +1,26 @@
 import CloseIcon from '@mui/icons-material/Close';
 import { Box, Button, Grid, IconButton, MenuItem, Typography } from '@mui/material';
-import i18next from 'i18next';
 import { useState } from 'react';
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuidv4 } from 'uuid';
+import useFindTranslation from '../../../../hooks/useFindTranslation';
 import useExercisesCollection from '../../../../store/hooks/useExercisesCollection';
 import { CallbackDefault } from '../../../../types/commonTypes';
-import { Lang } from '../../../../types/globalTypes';
 import Input from '../../../inputs/Input';
 import FormErrorMessage from '../../../messages/FormErrorMessage';
 import ConfirmModal from '../../../modals/confirmModal/ConfirmModal';
 import { TrainingFormData } from '../TrainingForm';
-import SetForm from './SetForm';
+import TrainingSetForm from './TrainingSetForm';
 
-interface ExerciseFormProps {
+interface TrainingExerciseFormProps {
   index: number;
   onRemove: CallbackDefault;
 }
 
-const ExerciseForm = ({ index, onRemove }: ExerciseFormProps) => {
+const TrainingExerciseForm = ({ index, onRemove }: TrainingExerciseFormProps) => {
   const { t } = useTranslation();
-  const currentLang = i18next.resolvedLanguage ?? Lang.PL;
+  const { findTranslation } = useFindTranslation();
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -78,7 +77,7 @@ const ExerciseForm = ({ index, onRemove }: ExerciseFormProps) => {
             >
               {exercises.map(ex => (
                 <MenuItem key={ex.id} value={ex.id}>
-                  {ex.name[currentLang]}
+                  {findTranslation(ex.name)}
                 </MenuItem>
               ))}
             </Input>
@@ -90,7 +89,7 @@ const ExerciseForm = ({ index, onRemove }: ExerciseFormProps) => {
         <FormErrorMessage errors={errors} name={`exercises.${index}.sets`} />
 
         {sets.map((set, setIndex) => (
-          <SetForm key={set.id} exerciseIndex={index} setIndex={setIndex} onRemove={() => remove(setIndex)} />
+          <TrainingSetForm key={set.id} exerciseIndex={index} setIndex={setIndex} onRemove={() => remove(setIndex)} />
         ))}
 
         <Button fullWidth sx={{ marginTop: '1rem' }} onClick={addSet}>
@@ -110,4 +109,4 @@ const ExerciseForm = ({ index, onRemove }: ExerciseFormProps) => {
   );
 };
 
-export default ExerciseForm;
+export default TrainingExerciseForm;

@@ -10,12 +10,9 @@ export interface ITrainingExercise {
   sets: ITrainingSet[];
 }
 
-export interface ITrainingAdd {
-  date: Date;
-  exercises: ITrainingExercise[];
-}
-
-export interface ITraining extends ITrainingAdd {
+export interface ITraining {
   id: string;
   createdAt: Date;
+  date: Date;
+  exercises: ITrainingExercise[];
 }

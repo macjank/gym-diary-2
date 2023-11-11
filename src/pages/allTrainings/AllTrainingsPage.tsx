@@ -4,7 +4,7 @@ import AddTrainingFAB from '../../components/buttons/addTrainingFAB/AddTrainingF
 import TrainingsList from '../../components/lists/trainingsList/TrainingsList';
 import ContentWrapper from '../../components/wrappers/ContentWrapper';
 import withLoading from '../../hoc/withLoading/withLoading';
-import useTrainings from '../../hooks/api/auth/useTrainings';
+import useTrainings from '../../hooks/api/trainings/useTrainings';
 
 const TrainingsListWithLoading = withLoading(TrainingsList);
 

@@ -32,3 +32,8 @@ export const trainingExercise = yup.object().shape({
   exerciseId: requiredString,
   sets: yup.array().of(trainingSet).required('required').min(1, 'setsRequired'),
 });
+
+export const multilangString = yup.object({
+  lang: requiredString,
+  value: requiredString,
+});

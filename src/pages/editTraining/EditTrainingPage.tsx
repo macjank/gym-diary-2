@@ -4,8 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import TrainingForm, { TrainingFormData } from '../../components/forms/trainingForm/TrainingForm';
 import ContentWrapper from '../../components/wrappers/ContentWrapper';
 import withLoading from '../../hoc/withLoading/withLoading';
-import useEditTraining from '../../hooks/api/auth/useEditTraining';
-import useSingleTraining from '../../hooks/api/auth/useSingleTraining';
+import useEditTraining from '../../hooks/api/trainings/useEditTraining';
+import useSingleTraining from '../../hooks/api/trainings/useSingleTraining';
 import { routes } from '../../routes/routes';
 
 const TrainingFormWithLoading = withLoading(TrainingForm);

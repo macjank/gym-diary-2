@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AppRoutes from './routes/AppRoutes';
-import TrainingsService from './services/trainings/TrainingsService';
+import ExercisesService from './services/exercises/ExercisesService';
 import store from './store';
 import { setExercisesCategories } from './store/slices/exercisesCategoriesCollectionSlice';
 import { setExercises } from './store/slices/exercisesCollectionSlice';
@@ -14,10 +14,10 @@ import './styles/global.css';
 
 function App() {
   const getExercisesInitData = async () => {
-    const categories = await TrainingsService.getExercisesCategories();
+    const categories = await ExercisesService.getExercisesCategories();
     store.dispatch(setExercisesCategories({ exercisesCategories: categories }));
 
-    const exercises = await TrainingsService.getExercises();
+    const exercises = await ExercisesService.getExercises();
     store.dispatch(setExercises({ exercises }));
   };
 

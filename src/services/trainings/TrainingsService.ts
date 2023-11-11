@@ -13,10 +13,10 @@ import {
   updateDoc,
   where,
 } from 'firebase/firestore';
+import { TrainingFormData } from '../../components/forms/trainingForm/TrainingForm';
 import { db } from '../../static/firebase/config';
-import { ApiAddTrainingRequest, ApiBaseExercise, ApiBaseExerciseCategory } from '../../types/apiTypes';
 import { FirebaseCollectionsEnum } from '../../types/firebaseCollectionsEnum';
-import { ITraining, ITrainingAdd } from '../../types/trainingTypes';
+import { ITraining } from '../../types/trainingTypes';
 
 class TrainingsService {
   static async getUserId() {
@@ -30,38 +30,13 @@ class TrainingsService {
     return user.uid;
   }
 
-  static async getExercisesCategories() {
-    const querySnapshot = await getDocs(collection(db, FirebaseCollectionsEnum.ExercisesCategories));
-
-    const categories: ApiBaseExerciseCategory[] = [];
-
-    querySnapshot.forEach(doc => {
-      const data = doc.data();
-      categories.push(data as ApiBaseExerciseCategory);
-    });
-
-    return categories;
-  }
-
-  static async getExercises() {
-    const querySnapshot = await getDocs(collection(db, FirebaseCollectionsEnum.Exercises));
-
-    const exercises: ApiBaseExercise[] = [];
-
-    querySnapshot.forEach(doc => {
-      const data = doc.data();
-      exercises.push(data as ApiBaseExercise);
-    });
-
-    return exercises;
-  }
-
-  static async addTraining(training: ApiAddTrainingRequest) {
+  static async addTraining(training: TrainingFormData) {
     const userId = await this.getUserId();
 
     await addDoc(collection(db, FirebaseCollectionsEnum.Trainings), {
-      uid: userId,
       ...training,
+      uid: userId,
+      createdAt: new Date(),
     });
   }
 
@@ -115,7 +90,7 @@ class TrainingsService {
     }
   }
 
-  static async editTraining({ id, trainingData }: { id: string; trainingData: ITrainingAdd }) {
+  static async editTraining({ id, trainingData }: { id: string; trainingData: TrainingFormData }) {
     const docRef = doc(db, FirebaseCollectionsEnum.Trainings, id);
 
     await updateDoc(docRef, {

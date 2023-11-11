@@ -9,13 +9,13 @@ import FormErrorMessage from '../../../messages/FormErrorMessage';
 import ConfirmModal from '../../../modals/confirmModal/ConfirmModal';
 import { TrainingFormData } from '../TrainingForm';
 
-interface SetFormProps {
+interface TrainingSetFormProps {
   exerciseIndex: number;
   setIndex: number;
   onRemove: CallbackDefault;
 }
 
-const SetForm = ({ exerciseIndex, setIndex, onRemove }: SetFormProps) => {
+const TrainingSetForm = ({ exerciseIndex, setIndex, onRemove }: TrainingSetFormProps) => {
   const { t } = useTranslation();
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -102,4 +102,4 @@ const SetForm = ({ exerciseIndex, setIndex, onRemove }: SetFormProps) => {
   );
 };
 
-export default SetForm;
+export default TrainingSetForm;
