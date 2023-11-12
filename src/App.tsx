@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useIsAuthenticated from './hooks/api/auth/useIsAuthenticated';
 import AppRoutes from './routes/AppRoutes';
 import ExercisesService from './services/exercises/ExercisesService';
 import store from './store';
@@ -13,6 +14,8 @@ import { setExercises } from './store/slices/exercisesCollectionSlice';
 import './styles/global.css';
 
 function App() {
+  const { isAuthenticated } = useIsAuthenticated();
+
   const getExercisesInitData = async () => {
     const categories = await ExercisesService.getExercisesCategories();
     store.dispatch(setExercisesCategories({ exercisesCategories: categories }));
@@ -22,8 +25,12 @@ function App() {
   };
 
   useEffect(() => {
+    if (!isAuthenticated) {
+      return;
+    }
+
     getExercisesInitData();
-  }, []);
+  }, [isAuthenticated]);
 
   return (
     <>

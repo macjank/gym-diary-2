@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import AddExerciseForm, { ExerciseFormData } from '../../components/forms/exerciseForm/ExerciseForm';
+import ExerciseForm, { ExerciseFormData } from '../../components/forms/exerciseForm/ExerciseForm';
 import ContentWrapper from '../../components/wrappers/ContentWrapper';
 import useAddExercise from '../../hooks/api/exercises/useAddExercise';
 import { routes } from '../../routes/routes';
@@ -26,7 +26,7 @@ const AddExercisePage = () => {
         {t('addExercise.subtitle')}
       </Typography>
 
-      <AddExerciseForm onSubmitForm={handleAddExercise} isLoading={isLoading} />
+      <ExerciseForm onSubmitForm={handleAddExercise} isLoading={isLoading} />
     </ContentWrapper>
   );
 };

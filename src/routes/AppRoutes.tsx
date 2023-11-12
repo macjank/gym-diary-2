@@ -5,6 +5,7 @@ import AddExercisePage from '../pages/addExercise/AddExercisePage';
 import AddTrainingPage from '../pages/addTraining/AddTrainingPage';
 import AllExercisesPage from '../pages/allExercises/AllExercisesPage';
 import AllTrainingsPage from '../pages/allTrainings/AllTrainingsPage';
+import EditExercisePage from '../pages/editExercise/EditExercisePage';
 import EditTrainingPage from '../pages/editTraining/EditTrainingPage';
 import HomePage from '../pages/home/HomePage';
 import LoginPage from '../pages/login/LoginPage';
@@ -41,6 +42,9 @@ const AppRoutes = () => {
       </Route>
       <Route element={<ProtectedRoute />}>
         <Route path={paths.addExercise} element={withLayout(<AddExercisePage />)} />
+      </Route>
+      <Route element={<ProtectedRoute />}>
+        <Route path={paths.editExercise} element={withLayout(<EditExercisePage />)} />
       </Route>
 
       <Route element={<ProtectedRoute />}>

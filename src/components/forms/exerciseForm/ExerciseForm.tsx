@@ -2,6 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Button, Stack } from '@mui/material';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { IExercise } from '../../../types/exerciseTypes';
 import { MultilangString } from '../../../types/globalTypes';
 import { addExerciseFormSchema } from '../../../utils/validationSchemas/addExerciseFormSchema';
 import BottomActionBox from '../../bottomActionBox/BottomActionBox';
@@ -15,9 +16,10 @@ export interface ExerciseFormData {
 interface ExerciseFormProps {
   onSubmitForm: (data: ExerciseFormData) => void;
   isLoading: boolean;
+  initialExercise?: IExercise;
 }
 
-const ExerciseForm = ({ onSubmitForm, isLoading }: ExerciseFormProps) => {
+const ExerciseForm = ({ onSubmitForm, isLoading, initialExercise }: ExerciseFormProps) => {
   const { t } = useTranslation();
 
   const {
@@ -27,7 +29,7 @@ const ExerciseForm = ({ onSubmitForm, isLoading }: ExerciseFormProps) => {
   } = useForm<ExerciseFormData>({
     resolver: yupResolver(addExerciseFormSchema),
     defaultValues: {
-      name: [
+      name: initialExercise?.name ?? [
         {
           lang: 'pl',
           value: '',

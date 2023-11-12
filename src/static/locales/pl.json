@@ -69,10 +69,16 @@
     "addFirst": "Dodaj pierwszy trening"
   },
   "allExercises": {
-    "title": "Moje ćwiczenia"
+    "title": "Moje ćwiczenia",
+    "emptyList": "Brak danych",
+    "addFirst": "Dodaj pierwszy trening"
   },
   "addExercise": {
     "title": "Nowe ćwiczenie",
+    "subtitle": "Nazwij nowe ćwiczenie we wszystkich wskazanych językach"
+  },
+  "editExercise": {
+    "title": "Edycja ćwiczenia",
     "subtitle": "Nazwij nowe ćwiczenie we wszystkich wskazanych językach"
   },
   "exerciseForm": {
@@ -90,6 +96,7 @@
       "editTrainingGeneral": "Nie udało się edytować treningu",
       "deleteTrainingGeneral": "Nie udało się usunąć treningu",
       "addExerciseGeneral": "Nie udało się zapisać ćwiczenia",
+      "editExerciseGeneral": "Nie udało się edytować ćwiczenia",
       "getDataGeneral": "Nie udało się pobrać danych",
       "auth/too-many-requests": "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.",
       "auth/invalid-login-credentials": "Invalid login credentials",
@@ -112,7 +119,7 @@
   "successMessages": {
     "register": "Konto zostało utworzone",
     "newTrainingAdded": "Trening został dodany",
-    "trainingEdited": "Zmiany zostały zapisane",
+    "dataHasBeenSaved": "Zmiany zostały zapisane",
     "trainingDeleted": "Trening został usunięty",
     "newExerciseAdded": "Ćwiczenie zostało dodane"
   }

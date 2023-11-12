@@ -8,6 +8,7 @@ export const routes = {
   editTraining: (id: string) => `/trainings/${id}/edit`,
   allExercises: '/exercises',
   addExercise: '/exercises/add',
+  editExercise: (id: string) => `/exercises/${id}/edit`,
 };
 
 export const paths = {
@@ -20,4 +21,5 @@ export const paths = {
   editTraining: '/trainings/:id/edit',
   allExercises: '/exercises',
   addExercise: '/exercises/add',
+  editExercise: '/exercises/:id/edit',
 };

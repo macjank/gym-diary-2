@@ -1,5 +1,16 @@
 import { getAuth } from 'firebase/auth';
-import { DocumentData, Query, addDoc, collection, getDocs, query, where } from 'firebase/firestore';
+import {
+  DocumentData,
+  Query,
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from 'firebase/firestore';
 import { ExerciseFormData } from '../../components/forms/exerciseForm/ExerciseForm';
 import { db } from '../../static/firebase/config';
 import { ApiBaseExerciseCategory, IExercise } from '../../types/exerciseTypes';
@@ -57,6 +68,33 @@ class ExercisesService {
       ...exercise,
       uid: userId,
       createdAt: new Date(),
+    });
+  }
+
+  static async getSingleExercise(id: string) {
+    const docRef = doc(db, FirebaseCollectionsEnum.Exercises, id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const exerciseResponse = docSnap.data();
+
+      const exercise = {
+        ...exerciseResponse,
+        id: docSnap.id,
+        createdAt: exerciseResponse.createdAt.toDate(),
+      };
+
+      return exercise as IExercise;
+    } else {
+      throw new Error('noSuchDocument');
+    }
+  }
+
+  static async editExercise({ id, exerciseData }: { id: string; exerciseData: ExerciseFormData }) {
+    const docRef = doc(db, FirebaseCollectionsEnum.Exercises, id);
+
+    await updateDoc(docRef, {
+      ...exerciseData,
     });
   }
 }
