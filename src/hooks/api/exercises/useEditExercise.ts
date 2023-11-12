@@ -1,25 +1,30 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { TrainingFormData } from '../../../components/forms/trainingForm/TrainingForm';
-import TrainingsService from '../../../services/trainings/TrainingsService';
+import { ExerciseFormData } from '../../../components/forms/exerciseForm/ExerciseForm';
+import ExercisesService from '../../../services/exercises/ExercisesService';
+import store from '../../../store';
+import { setExercises } from '../../../store/slices/exercisesCollectionSlice';
 import { getApiErrorMessage } from '../../../utils/handleApiError/handleApiError';
 import useToast from '../../useToast';
 
-const useEditTraining = () => {
+const useEditExercise = () => {
   const { t } = useTranslation();
   const { showErrorToast, showSuccessToast } = useToast();
 
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const editTraining = async ({ id, trainingData }: { id: string; trainingData: TrainingFormData }) => {
+  const editExercise = async ({ id, exerciseData }: { id: string; exerciseData: ExerciseFormData }) => {
     setIsLoading(true);
     setIsError(false);
 
     try {
-      await TrainingsService.editTraining({ id, trainingData });
+      await ExercisesService.editExercise({ id, exerciseData });
 
       showSuccessToast(t('successMessages.dataHasBeenSaved'));
+
+      const exercises = await ExercisesService.getExercises();
+      store.dispatch(setExercises({ exercises }));
     } catch (error) {
       const errorMsg = getApiErrorMessage(error);
 
@@ -31,7 +36,7 @@ const useEditTraining = () => {
     }
   };
 
-  return { editTraining, isLoading, isError };
+  return { editExercise, isLoading, isError };
 };
 
-export default useEditTraining;
+export default useEditExercise;

@@ -31,8 +31,7 @@ const ExercisesList = ({ exercises }: ExercisesListProps) => {
     <List>
       {exercises?.map((exercise, index) => (
         <Fragment key={exercise.id}>
-          {/* //TODO:add edit */}
-          <RouterLink to={routes.addExercise}>
+          <RouterLink to={routes.editExercise(exercise.id)}>
             <ListItem
               sx={{
                 padding: '1.5rem 0',
