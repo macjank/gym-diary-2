@@ -1,119 +1,126 @@
 {
   "test": "test",
   "navigation": {
-    "addTraining": "Nowy trening",
-    "allTrainings": "Moje treningi",
-    "allExercises": "Moje ćwiczenia",
-    "logout": "Wyloguj się"
+    "addTraining": "New training",
+    "allTrainings": "My trainings",
+    "allExercises": "My exercises",
+    "logout": "Logout"
   },
   "login": {
-    "title": "Logowanie",
+    "title": "Login",
     "emailLabel": "E-mail",
-    "passwordLabel": "Hasło",
-    "submitBtn": "Zaloguj się",
-    "googleLogin": "Zaloguj się z Google",
-    "noAccount": "Nie masz konta?",
-    "registerLinkBtn": "Zarejestruj się"
+    "passwordLabel": "Password",
+    "submitBtn": "Login",
+    "googleLogin": "Login with Google",
+    "noAccount": "Don't have an account?",
+    "registerLinkBtn": "Register"
   },
   "register": {
-    "title": "Rejestracja",
+    "title": "Registration",
     "emailLabel": "E-mail",
-    "passwordLabel": "Hasło",
-    "confirmPasswordLabel": "Potwierdź hasło",
-    "submitBtn": "Zarejestruj się",
-    "haveAccount": "Masz już konto?",
-    "loginLinkBtn": "Zaloguj się"
+    "passwordLabel": "Password",
+    "confirmPasswordLabel": "Confirm password",
+    "submitBtn": "Register",
+    "haveAccount": "Already have an account?",
+    "loginLinkBtn": "Login"
   },
   "home": {
-    "title": "Ostatnie treningi",
-    "seeAllTrainingsBtn": "Zobacz wszystkie"
+    "title": "Recent trainings",
+    "seeAllTrainingsBtn": "See all"
   },
   "addTraining": {
-    "title": "Nowy trening"
+    "title": "New training"
   },
   "editTraining": {
-    "title": "Edytuj trening"
+    "title": "Edit training"
   },
   "allTrainings": {
-    "title": "Moje treningi"
+    "title": "My trainings"
   },
   "trainingDetails": {
-    "title": "Szczegóły treningu",
-    "set": "Seria",
-    "repetitions": "Powtórzenia",
-    "weight": "Masa [kg]",
+    "title": "Training details",
+    "set": "Set",
+    "repetitions": "Repetitions",
+    "weight": "Weight [kg]",
     "delete": {
-      "title": "Czy na pewno chcesz usunąć trening?",
-      "cancelBtn": "Anuluj",
-      "confirmBtn": "Usuń"
+      "title": "Are you sure you want to delete the training?",
+      "cancelBtn": "Cancel",
+      "confirmBtn": "Delete"
     }
   },
   "trainingForm": {
-    "dateLabel": "Data",
-    "addExerciseBtn": "Dodaj ćwiczenie",
-    "submitFormBtn": "Zapisz trening",
-    "exerciseNameLabel": "Nazwa ćwiczenia",
-    "addSetBtn": "Dodaj serię",
-    "exerciseTitle": "Ćwiczenie",
-    "setTitle": "Seria",
-    "setWeightLabel": "Masa (kg)",
-    "setRepsLabel": "Powtórzenia",
+    "dateLabel": "Date",
+    "addExerciseBtn": "Add exercise",
+    "submitFormBtn": "Save training",
+    "exerciseNameLabel": "Exercise name",
+    "addSetBtn": "Add set",
+    "exerciseTitle": "Exercise",
+    "setTitle": "Set",
+    "setWeightLabel": "Weight (kg)",
+    "setRepsLabel": "Repetitions",
     "deleteExercise": {
-      "title": "Czy na pewno chcesz usunąć ćwiczenie?",
-      "cancelBtn": "Anuluj",
-      "confirmBtn": "Usuń"
+      "title": "Are you sure you want to delete the exercise?",
+      "cancelBtn": "Cancel",
+      "confirmBtn": "Delete"
     }
   },
   "trainingsList": {
-    "emptyList": "Brak danych",
-    "addFirst": "Dodaj pierwszy trening"
+    "emptyList": "No data",
+    "addFirst": "Add the first training"
   },
   "allExercises": {
-    "title": "Moje ćwiczenia"
+    "title": "My exercises",
+    "emptyList": "No data",
+    "addFirst": "Add the first exercise"
   },
   "addExercise": {
-    "title": "Nowe ćwiczenie",
-    "subtitle": "Nazwij nowe ćwiczenie we wszystkich wskazanych językach"
+    "title": "New exercise",
+    "subtitle": "Name the new exercise in all specified languages"
+  },
+  "editExercise": {
+    "title": "Edit exercise",
+    "subtitle": "Name the new exercise in all specified languages"
   },
   "exerciseForm": {
     "name": {
-      "pl": "Nazwa - język polski",
-      "en": "Nazwa - język angielski"
+      "pl": "Name - Polish",
+      "en": "Name - English"
     },
-    "submitBtn": "Zapisz ćwiczenie"
+    "submitBtn": "Save exercise"
   },
   "errorMessages": {
     "api": {
-      "generalError": "Coś poszło nie tak. Prosimy spróbować ponownie później",
-      "loginGeneral": "Nie udało się zalogować",
-      "addTrainingGeneral": "Nie udało się zapisać treningu",
-      "editTrainingGeneral": "Nie udało się edytować treningu",
-      "deleteTrainingGeneral": "Nie udało się usunąć treningu",
-      "addExerciseGeneral": "Nie udało się zapisać ćwiczenia",
-      "getDataGeneral": "Nie udało się pobrać danych",
+      "generalError": "Something went wrong. Please try again later",
+      "loginGeneral": "Login failed",
+      "addTrainingGeneral": "Failed to save training",
+      "editTrainingGeneral": "Failed to edit training",
+      "deleteTrainingGeneral": "Failed to delete training",
+      "addExerciseGeneral": "Failed to save exercise",
+      "editExerciseGeneral": "Failed to edit exercise",
+      "getDataGeneral": "Failed to retrieve data",
       "auth/too-many-requests": "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.",
       "auth/invalid-login-credentials": "Invalid login credentials",
-      "noSuchDocument": "Nie znaleziono dokumentu",
-      "permission-denied": "Brak dostępu. Zaloguj się, aby kontynuować.",
-      "logoutGeneral": "Nie udało się wylogować",
-      "registerGeneral": "Nie udało się zarejestrować"
+      "noSuchDocument": "Document not found",
+      "permission-denied": "Access denied. Please log in to continue.",
+      "logoutGeneral": "Failed to log out",
+      "registerGeneral": "Failed to register"
     },
     "form": {
-      "required": "Pole wymagane",
-      "positiveNum": "Wymagana liczba większa od 0",
-      "invalidEmail": "Niepoprawny adres e-mail",
-      "min8Char": "Wymagane min. 8 znaków",
-      "differentPasswords": "Hasła nie są takie same",
-      "setsRequired": "Dodaj min. 1 serię",
-      "exercisesRequired": "Dodaj min. 1 ćwiczenie",
-      "positiveNumber": "Zbyt mała wartość"
+      "required": "Field required",
+      "positiveNum": "Required number greater than 0",
+      "invalidEmail": "Invalid email address",
+      "min8Char": "Minimum 8 characters required",
+      "differentPasswords": "Passwords do not match",
+      "setsRequired": "Add at least 1 set",
+      "exercisesRequired": "Add at least 1 exercise",
+      "positiveNumber": "Value too small"
     }
   },
   "successMessages": {
-    "register": "Konto zostało utworzone",
-    "newTrainingAdded": "Trening został dodany",
-    "trainingEdited": "Zmiany zostały zapisane",
-    "trainingDeleted": "Trening został usunięty",
-    "newExerciseAdded": "Ćwiczenie zostało dodane"
+    "register": "Account created",
+    "newTrainingAdded": "Training added",
+    "dataHasBeenSaved": "Changes saved",
+    "trainingDeleted": "Training deleted",
+    "newExerciseAdded": "Exercise added"
   }
 }
