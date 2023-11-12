@@ -5,7 +5,7 @@ import ContentWrapper from '../../components/wrappers/ContentWrapper';
 import useLogin from '../../hooks/api/auth/useLogin';
 import { routes } from '../../routes/routes';
 import { ApiPasswordLoginRequest } from '../../types/apiTypes';
-import LoginForm from './components/LoginForm';
+import LoginForm from './components/loginForm/LoginForm';
 
 const LoginPage = () => {
   const navigate = useNavigate();

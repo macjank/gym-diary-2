@@ -5,7 +5,7 @@ import ContentWrapper from '../../components/wrappers/ContentWrapper';
 import useRegister from '../../hooks/api/auth/useRegister';
 import { routes } from '../../routes/routes';
 import { ApiPasswordRegisterRequest } from '../../types/apiTypes';
-import RegisterForm from './components/RegisterForm';
+import RegisterForm from './components/registerForm/RegisterForm';
 
 const RegisterPage = () => {
   const navigate = useNavigate();

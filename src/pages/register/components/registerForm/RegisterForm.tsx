@@ -2,10 +2,16 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Button, Stack } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import Input from '../../../components/inputs/Input';
-import FormErrorMessage from '../../../components/messages/FormErrorMessage';
-import { ApiPasswordRegisterRequest } from '../../../types/apiTypes';
-import { registerFormSchema } from '../../../utils/validationSchemas/registerFormSchema';
+import Input from '../../../../components/inputs/Input';
+import FormErrorMessage from '../../../../components/messages/FormErrorMessage';
+import { ApiPasswordRegisterRequest } from '../../../../types/apiTypes';
+import { registerFormSchema } from '../../../../utils/validationSchemas/registerFormSchema';
+
+interface RegisterFormData {
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
 
 interface RegisterFormProps {
   onSubmitForm: ({ email, password }: ApiPasswordRegisterRequest) => Promise<void>;
@@ -18,11 +24,12 @@ const RegisterForm = ({ onSubmitForm, isLoading }: RegisterFormProps) => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({
+  } = useForm<RegisterFormData>({
     resolver: yupResolver(registerFormSchema),
   });
 
-  const onSubmit = async ({ email, password }: ApiPasswordRegisterRequest) => {
+  const onSubmit = async (data: RegisterFormData) => {
+    const { email, password } = data;
     await onSubmitForm({ email, password });
   };
 
