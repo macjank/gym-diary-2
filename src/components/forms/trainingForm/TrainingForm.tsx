@@ -54,7 +54,7 @@ const TrainingForm = ({ onSubmitForm, isLoading, initialTraining }: TrainingForm
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Stack pb="8rem" mt="1rem">
+          <Stack pb="14rem" mt="1rem">
           <Stack>
             <Controller
               name="date"
