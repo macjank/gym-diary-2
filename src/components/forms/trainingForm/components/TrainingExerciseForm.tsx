@@ -1,5 +1,6 @@
+import { ArrowDropDown, ArrowDropUp } from '@mui/icons-material';
 import CloseIcon from '@mui/icons-material/Close';
-import { Box, Button, Grid, IconButton, MenuItem, Typography } from '@mui/material';
+import { Box, Button, Collapse, Grid, IconButton, MenuItem, Stack, Typography } from '@mui/material';
 import { useState } from 'react';
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -24,6 +25,8 @@ const TrainingExerciseForm = ({ index, onRemove }: TrainingExerciseFormProps) =>
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
+  const [isCollapsed, setIsCollapsed] = useState(true);
+
   const { exercises } = useExercisesCollection();
 
   const {
@@ -47,7 +50,12 @@ const TrainingExerciseForm = ({ index, onRemove }: TrainingExerciseFormProps) =>
     <>
       <Grid mt={'2rem'}>
         <Box display="flex" justifyContent="space-between" alignItems="center" mb="1rem">
-          <Typography variant="h6">{`${t('trainingForm.exerciseTitle')} ${index + 1}`}</Typography>
+          <Stack direction="row" alignItems="center">
+            <Typography variant="h6">{`${t('trainingForm.exerciseTitle')} ${index + 1}`}</Typography>
+            <IconButton onClick={() => setIsCollapsed(prev => !prev)}>
+              {isCollapsed ? <ArrowDropUp /> : <ArrowDropDown />}
+            </IconButton>
+          </Stack>
           <IconButton
             onClick={() => setIsDeleteModalOpen(true)}
             size="large"
@@ -59,42 +67,44 @@ const TrainingExerciseForm = ({ index, onRemove }: TrainingExerciseFormProps) =>
           </IconButton>
         </Box>
 
-        <Controller
-          name={`exercises.${index}.exerciseId`}
-          control={control}
-          render={({ field }) => (
-            <Input
-              inputProps={{
-                id: 'exercise-exerciseId',
-                type: 'email',
-                error: !!errors.exercises?.[index]?.exerciseId,
-                label: t('trainingForm.exerciseNameLabel'),
-                select: true,
-              }}
-              formFieldProps={{
-                ...field,
-              }}
-            >
-              {exercises.map(ex => (
-                <MenuItem key={ex.id} value={ex.id}>
-                  {findTranslation(ex.name)}
-                </MenuItem>
-              ))}
-            </Input>
-          )}
-        />
+        <Collapse in={isCollapsed}>
+          <Controller
+            name={`exercises.${index}.exerciseId`}
+            control={control}
+            render={({ field }) => (
+              <Input
+                inputProps={{
+                  id: 'exercise-exerciseId',
+                  type: 'email',
+                  error: !!errors.exercises?.[index]?.exerciseId,
+                  label: t('trainingForm.exerciseNameLabel'),
+                  select: true,
+                }}
+                formFieldProps={{
+                  ...field,
+                }}
+              >
+                {exercises.map(ex => (
+                  <MenuItem key={ex.id} value={ex.id}>
+                    {findTranslation(ex.name)}
+                  </MenuItem>
+                ))}
+              </Input>
+            )}
+          />
 
-        <FormErrorMessage errors={errors} name={`exercises.${index}.exerciseId`} />
+          <FormErrorMessage errors={errors} name={`exercises.${index}.exerciseId`} />
 
-        <FormErrorMessage errors={errors} name={`exercises.${index}.sets`} />
+          <FormErrorMessage errors={errors} name={`exercises.${index}.sets`} />
 
-        {sets.map((set, setIndex) => (
-          <TrainingSetForm key={set.id} exerciseIndex={index} setIndex={setIndex} onRemove={() => remove(setIndex)} />
-        ))}
+          {sets.map((set, setIndex) => (
+            <TrainingSetForm key={set.id} exerciseIndex={index} setIndex={setIndex} onRemove={() => remove(setIndex)} />
+          ))}
 
-        <Button fullWidth sx={{ marginTop: '1rem' }} onClick={addSet}>
-          {t('trainingForm.addSetBtn')}
-        </Button>
+          <Button fullWidth sx={{ marginTop: '1rem' }} onClick={addSet}>
+            {t('trainingForm.addSetBtn')}
+          </Button>
+        </Collapse>
       </Grid>
 
       <ConfirmModal
