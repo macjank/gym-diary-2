@@ -14,7 +14,7 @@ const AddExercisePage = () => {
 
   const handleAddExercise = async (data: ExerciseFormData) => {
     await addExercise(data);
-    navigate(routes.home);
+    navigate(routes.allExercises);
   };
 
   return (

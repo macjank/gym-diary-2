@@ -49,12 +49,14 @@ const TrainingForm = ({ onSubmitForm, isLoading, initialTraining }: TrainingForm
       exerciseId: '',
       sets: [],
     });
+
+    setTimeout(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }), 500);
   };
 
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Stack pb="8rem" mt="1rem">
+        <Stack pb="14rem" mt="1rem">
           <Stack>
             <Controller
               name="date"
