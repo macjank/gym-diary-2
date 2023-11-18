@@ -49,6 +49,8 @@ const TrainingForm = ({ onSubmitForm, isLoading, initialTraining }: TrainingForm
       exerciseId: '',
       sets: [],
     });
+
+    setTimeout(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }), 500);
   };
 
   return (
