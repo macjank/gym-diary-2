@@ -8,6 +8,7 @@ import { trainingFormSchema } from '../../../utils/validationSchemas/trainingFor
 import BottomActionBox from '../../bottomActionBox/BottomActionBox';
 import DatePicker from '../../inputs/DatePicker';
 import FormErrorMessage from '../../messages/FormErrorMessage';
+import ConfirmModal from '../../modals/confirmModal/ConfirmModal';
 import TrainingExerciseForm from './components/TrainingExerciseForm';
 import { getTrainingFormDefaults } from './utils/getTrainingFormDefaults';
 
@@ -24,6 +25,7 @@ interface TrainingFormProps {
 
 const TrainingForm = ({ onSubmitForm, isLoading, initialTraining }: TrainingFormProps) => {
   const { t } = useTranslation();
+  const [isClearFormModalOpen, setIsClearFormModalOpen] = useState(false);
 
   const methods = useForm<TrainingFormData>({
     resolver: yupResolver(trainingFormSchema),
@@ -53,7 +55,13 @@ const TrainingForm = ({ onSubmitForm, isLoading, initialTraining }: TrainingForm
     setTimeout(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }), 500);
   };
 
+  const clearForm = () => {
+    reset(getTrainingFormDefaults());
+  };
+
+
   return (
+    <>
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack pb="14rem" mt="1rem">
@@ -84,6 +92,15 @@ const TrainingForm = ({ onSubmitForm, isLoading, initialTraining }: TrainingForm
 
       <BottomActionBox>
         <Stack gap={1}>
+            <Button
+              size="large"
+              type="button"
+              variant="outlined"
+              color="primary"
+              onClick={() => setIsClearFormModalOpen(true)}
+            >
+              {t('trainingForm.clearForm.openBtn')}
+            </Button>
           <Button size="large" type="button" variant="outlined" color="primary" onClick={addExercise}>
             {t('trainingForm.addExerciseBtn')}
           </Button>
@@ -100,6 +117,16 @@ const TrainingForm = ({ onSubmitForm, isLoading, initialTraining }: TrainingForm
         </Stack>
       </BottomActionBox>
     </FormProvider>
+
+      <ConfirmModal
+        isOpen={isClearFormModalOpen}
+        setIsOpen={setIsClearFormModalOpen}
+        title={t('trainingForm.clearForm.title')}
+        onConfirm={clearForm}
+        closeBtnText={t('trainingForm.clearForm.cancelBtn')}
+        confirmBtnText={t('trainingForm.clearForm.confirmBtn')}
+      />
+    </>
   );
 };
 
