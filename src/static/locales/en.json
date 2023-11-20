@@ -62,6 +62,12 @@
       "title": "Are you sure you want to delete the exercise?",
       "cancelBtn": "Cancel",
       "confirmBtn": "Delete"
+    },
+    "clearForm": {
+      "openBtn": "Reset",
+      "title": "Are you sure you want to delete the whole training?",
+      "cancelBtn": "Cancel",
+      "confirmBtn": "Reset"
     }
   },
   "trainingsList": {
