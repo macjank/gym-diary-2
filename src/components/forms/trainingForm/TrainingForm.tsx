@@ -1,13 +1,17 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Stack } from '@mui/material';
+import { useCallback, useEffect, useState } from 'react';
 import { Controller, FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuidv4 } from 'uuid';
+import { LocalStorageKey } from '../../../types/localStorageKeyEnum';
 import { ITraining, ITrainingExercise } from '../../../types/trainingTypes';
+import { LocaleStorageHelper } from '../../../utils/localeStorageHelper/LocaleStorageHelper';
 import { trainingFormSchema } from '../../../utils/validationSchemas/trainingFormSchema';
 import BottomActionBox from '../../bottomActionBox/BottomActionBox';
 import DatePicker from '../../inputs/DatePicker';
 import FormErrorMessage from '../../messages/FormErrorMessage';
+import ConfirmModal from '../../modals/confirmModal/ConfirmModal';
 import TrainingExerciseForm from './components/TrainingExerciseForm';
 import { getTrainingFormDefaults } from './utils/getTrainingFormDefaults';
 
@@ -24,6 +28,8 @@ interface TrainingFormProps {
 
 const TrainingForm = ({ onSubmitForm, isLoading, initialTraining }: TrainingFormProps) => {
   const { t } = useTranslation();
+  const [isClearFormModalOpen, setIsClearFormModalOpen] = useState(false);
+  const isNewTraining = !initialTraining;
 
   const methods = useForm<TrainingFormData>({
     resolver: yupResolver(trainingFormSchema),
@@ -34,6 +40,7 @@ const TrainingForm = ({ onSubmitForm, isLoading, initialTraining }: TrainingForm
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = methods;
 
   const { fields, append, remove } = useFieldArray({
@@ -53,53 +60,98 @@ const TrainingForm = ({ onSubmitForm, isLoading, initialTraining }: TrainingForm
     setTimeout(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }), 500);
   };
 
+  const clearForm = () => {
+    LocaleStorageHelper.removeItem(LocalStorageKey.newTrainingForm);
+    reset(getTrainingFormDefaults());
+  };
+
+  const handleSetInStorage = useCallback(() => {
+    const dataToStore = methods.getValues();
+
+    return LocaleStorageHelper.setItem(LocalStorageKey.newTrainingForm, dataToStore);
+  }, []);
+
+  useEffect(() => {
+    if (!isNewTraining) {
+      return;
+    }
+
+    const storedTrainingFormData = LocaleStorageHelper.getItem(LocalStorageKey.newTrainingForm);
+
+    if (!!storedTrainingFormData) {
+      reset(storedTrainingFormData);
+    }
+
+    return () => handleSetInStorage();
+  }, []);
+
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Stack pb="14rem" mt="1rem">
-          <Stack>
-            <Controller
-              name="date"
-              control={control}
-              render={({ field }) => (
-                <DatePicker
-                  label={t('trainingForm.dateLabel')}
-                  value={field.value}
-                  setValue={val => field.onChange(val)}
-                />
-              )}
-            />
-            <FormErrorMessage errors={errors} name="date" />
+    <>
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Stack pb="14rem" mt="1rem">
+            <Stack>
+              <Controller
+                name="date"
+                control={control}
+                render={({ field }) => (
+                  <DatePicker
+                    label={t('trainingForm.dateLabel')}
+                    value={field.value}
+                    setValue={val => field.onChange(val)}
+                  />
+                )}
+              />
+              <FormErrorMessage errors={errors} name="date" />
+            </Stack>
+
+            <FormErrorMessage errors={errors} name="exercises" />
+
+            <Stack>
+              {fields.map((exercise, index) => (
+                <TrainingExerciseForm key={exercise.id} index={index} onRemove={() => remove(index)} />
+              ))}
+            </Stack>
           </Stack>
+        </form>
 
-          <FormErrorMessage errors={errors} name="exercises" />
-
-          <Stack>
-            {fields.map((exercise, index) => (
-              <TrainingExerciseForm key={exercise.id} index={index} onRemove={() => remove(index)} />
-            ))}
+        <BottomActionBox>
+          <Stack gap={1}>
+            <Button
+              size="large"
+              type="button"
+              variant="outlined"
+              color="primary"
+              onClick={() => setIsClearFormModalOpen(true)}
+            >
+              {t('trainingForm.clearForm.openBtn')}
+            </Button>
+            <Button size="large" type="button" variant="outlined" color="primary" onClick={addExercise}>
+              {t('trainingForm.addExerciseBtn')}
+            </Button>
+            <Button
+              size="large"
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={handleSubmit(onSubmit)}
+              disabled={isLoading}
+            >
+              {t('trainingForm.submitFormBtn')}
+            </Button>
           </Stack>
-        </Stack>
-      </form>
+        </BottomActionBox>
+      </FormProvider>
 
-      <BottomActionBox>
-        <Stack gap={1}>
-          <Button size="large" type="button" variant="outlined" color="primary" onClick={addExercise}>
-            {t('trainingForm.addExerciseBtn')}
-          </Button>
-          <Button
-            size="large"
-            type="submit"
-            variant="contained"
-            color="primary"
-            onClick={handleSubmit(onSubmit)}
-            disabled={isLoading}
-          >
-            {t('trainingForm.submitFormBtn')}
-          </Button>
-        </Stack>
-      </BottomActionBox>
-    </FormProvider>
+      <ConfirmModal
+        isOpen={isClearFormModalOpen}
+        setIsOpen={setIsClearFormModalOpen}
+        title={t('trainingForm.clearForm.title')}
+        onConfirm={clearForm}
+        closeBtnText={t('trainingForm.clearForm.cancelBtn')}
+        confirmBtnText={t('trainingForm.clearForm.confirmBtn')}
+      />
+    </>
   );
 };
 

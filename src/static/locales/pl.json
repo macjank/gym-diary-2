@@ -62,6 +62,12 @@
       "title": "Czy na pewno chcesz usunąć ćwiczenie?",
       "cancelBtn": "Anuluj",
       "confirmBtn": "Usuń"
+    },
+    "clearForm": {
+      "openBtn": "Wyczyść",
+      "title": "Czy na pewno chcesz wyczyścić wszystkie dane?",
+      "cancelBtn": "Anuluj",
+      "confirmBtn": "Wyczyść"
     }
   },
   "trainingsList": {

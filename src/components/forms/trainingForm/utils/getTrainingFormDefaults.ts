@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { ITraining } from '../../../../types/trainingTypes';
 
-export const getTrainingFormDefaults = ({ initialTraining }: { initialTraining: ITraining | undefined }) => {
+export const getTrainingFormDefaults = ({ initialTraining }: { initialTraining?: ITraining | undefined } = {}) => {
   const initValues = {
     date: initialTraining?.date ?? new Date(),
     exercises: initialTraining?.exercises ?? [
