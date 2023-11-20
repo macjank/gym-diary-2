@@ -5,6 +5,8 @@ import TrainingForm, { TrainingFormData } from '../../components/forms/trainingF
 import ContentWrapper from '../../components/wrappers/ContentWrapper';
 import useAddTraining from '../../hooks/api/trainings/useAddTraining';
 import { routes } from '../../routes/routes';
+import { LocalStorageKey } from '../../types/localStorageKeyEnum';
+import { LocaleStorageHelper } from '../../utils/localeStorageHelper/LocaleStorageHelper';
 
 const AddTrainingPage = () => {
   const { t } = useTranslation();
@@ -14,6 +16,7 @@ const AddTrainingPage = () => {
 
   const handleAddTraining = async (data: TrainingFormData) => {
     await addTraining(data);
+    LocaleStorageHelper.removeItem(LocalStorageKey.newTrainingForm);
     navigate(routes.home);
   };
 
