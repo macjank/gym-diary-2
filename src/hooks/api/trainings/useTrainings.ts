@@ -23,7 +23,11 @@ const useTrainings = ({ limit }: useTrainingsProps = {}) => {
     try {
       const trainings = await TrainingsService.getTrainings({ queryLimit: limit });
 
-      setTrainings(trainings);
+      const trainingsSorted = trainings.sort((trainingA, trainingB) => {
+        return trainingB.date.getTime() - trainingA.date.getTime();
+      });
+
+      setTrainings(trainingsSorted);
     } catch (error) {
       setIsError(true);
       const errorMsg = getApiErrorMessage(error);
